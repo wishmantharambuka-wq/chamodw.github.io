@@ -1,0 +1,801 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Geo-Portal - Interactive Map | Rambuka Village</title>
+    <meta name="description" content="Explore Rambuka Village's interactive geographic portal with detailed maps, GIS data, landmarks, and downloadable geospatial information.">
+    <meta name="keywords" content="Rambuka GIS, interactive map, geoportal, geographic data, landmarks, coordinates, Sri Lanka mapping">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🗺️</text></svg>">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="assets/css/styles.css">
+    
+    <!-- Leaflet CSS for Interactive Maps -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+          integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+          crossorigin=""/>
+    
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "Rambuka Village Geo-Portal",
+        "description": "Interactive geographic information system for Rambuka Village",
+        "applicationCategory": "GIS Application",
+        "operatingSystem": "Web Browser",
+        "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "USD"
+        }
+    }
+    </script>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="nav-logo" aria-label="Rambuka Village Home">
+                🌿 Rambuka Village
+            </a>
+            
+            <button class="mobile-menu-toggle" aria-label="Toggle navigation menu" aria-expanded="false">
+                ☰ Menu
+            </button>
+            
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="index.html" class="nav-link">Home</a></li>
+                <li><a href="history.html" class="nav-link">History</a></li>
+                <li><a href="population.html" class="nav-link">Population</a></li>
+                <li><a href="geography.html" class="nav-link">Geography</a></li>
+                <li><a href="environment.html" class="nav-link">Environment</a></li>
+                <li><a href="geoportal.html" class="nav-link active">Geo-Portal</a></li>
+                <li><a href="contact.html" class="nav-link">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="page-section">
+        <div class="container">
+            <div class="section-header">
+                <h1 class="section-title">🗺️ Geo-Portal</h1>
+                <p class="section-description">
+                    Interactive geographic information system for exploring Rambuka's landscapes, 
+                    landmarks, and comprehensive geospatial data with advanced mapping tools.
+                </p>
+            </div>
+            
+            <div class="glass-container animate-fade-in-up">
+                <div class="grid grid-3" style="text-align: center;">
+                    <div>
+                        <div style="font-size: 3rem; margin-bottom: 1rem;">🌍</div>
+                        <h3 style="color: var(--forest-green); margin-bottom: 0.5rem;">6.4°N Latitude</h3>
+                        <p style="margin: 0;">Geographic position</p>
+                    </div>
+                    <div>
+                        <div style="font-size: 3rem; margin-bottom: 1rem;">🌏</div>
+                        <h3 style="color: var(--forest-green); margin-bottom: 0.5rem;">80.5°E Longitude</h3>
+                        <p style="margin: 0;">Coordinate reference</p>
+                    </div>
+                    <div>
+                        <div style="font-size: 3rem; margin-bottom: 1rem;">🗺️</div>
+                        <h3 style="color: var(--forest-green); margin-bottom: 0.5rem;">1159 km²</h3>
+                        <p style="margin: 0;">Total area coverage</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Interactive Map Section -->
+    <section class="page-section" style="background: rgba(255, 255, 255, 0.05);">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">🌍 Interactive Map</h2>
+                <p class="section-description">Explore Rambuka's geospatial data, landmarks, and natural features</p>
+            </div>
+
+            <!-- Map Container -->
+            <div class="map-wrapper glass-effect">
+                <div id="map" class="interactive-map"></div>
+                <style>
+                    .interactive-map {
+                        width: 100%;
+                        min-height: 400px;
+                        height: 400px;
+                        border-radius: 1rem;
+                        box-shadow: 0 4px 24px rgba(76,140,74,0.08);
+                        margin-bottom: 1rem;
+                    }
+                    @media (max-width: 600px) {
+                        .interactive-map {
+                            min-height: 250px;
+                            height: 250px;
+                        }
+                    }
+                </style>
+                
+                <!-- Map Controls -->
+                <div class="map-controls">
+                    <button class="btn btn-primary" onclick="downloadGeoJSON()">
+                        <span>📥</span> Download GeoJSON
+                    </button>
+                    <button class="btn btn-secondary" onclick="downloadCSV()">
+                        <span>📊</span> Download CSV
+                    </button>
+                    <button class="btn btn-tertiary" onclick="resetMap()">
+                        <span>🔄</span> Reset View
+                    </button>
+                    <button class="btn btn-info" onclick="toggleLayerPanel()">
+                        <span>🗂️</span> Layers
+                    </button>
+                </div>
+
+                <!-- Layer Control Panel -->
+                <div id="layerPanel" class="layer-panel glass-effect" style="display: none;">
+                    <h4>Map Layers</h4>
+                    <div class="layer-controls">
+                        <label class="layer-item">
+                            <input type="checkbox" id="villageLayer" checked onchange="toggleVillageLayer()">
+                            <span>🏘️ Village Center</span>
+                        </label>
+                        <label class="layer-item">
+                            <input type="checkbox" id="attractionsLayer" checked onchange="toggleAttractionsLayer()">
+                            <span>🗿 Attractions</span>
+                        </label>
+                        <label class="layer-item">
+                            <input type="checkbox" id="conservationLayer" checked onchange="toggleConservationLayer()">
+                            <span>🌳 Conservation</span>
+                        </label>
+                        <label class="layer-item">
+                            <input type="checkbox" id="waterLayer" checked onchange="toggleWaterLayer()">
+                            <span>💧 Water Sources</span>
+                        </label>
+                        <label class="layer-item">
+                            <input type="checkbox" id="agricultureLayer" checked onchange="toggleAgricultureLayer()">
+                            <span>🌾 Agriculture</span>
+                        </label>
+                        <label class="layer-item">
+                            <input type="checkbox" id="boundaryLayer" checked onchange="toggleBoundaryLayer()">
+                            <span>📍 Boundaries</span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Coordinates Display Section -->
+    <section class="page-section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">📍 Geographic Data</h2>
+                <p class="section-description">Precise coordinates and geographic information</p>
+            </div>
+
+            <div class="coordinates-grid">
+                <div class="coordinates-card glass-effect">
+                    <div class="coord-header">
+                        <h3>🏘️ Village Center</h3>
+                        <div class="coord-badge">Primary Location</div>
+                    </div>
+                    <div class="coord-data">
+                        <div class="coord-item">
+                            <span class="coord-label">Latitude:</span>
+                            <span class="coord-value">6.4000°N</span>
+                        </div>
+                        <div class="coord-item">
+                            <span class="coord-label">Longitude:</span>
+                            <span class="coord-value">80.5000°E</span>
+                        </div>
+                        <div class="coord-item">
+                            <span class="coord-label">Elevation:</span>
+                            <span class="coord-value">~450m ASL</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="coordinates-card glass-effect">
+                    <div class="coord-header">
+                        <h3>🗿 Stone Columns</h3>
+                        <div class="coord-badge">Tourist Attraction</div>
+                    </div>
+                    <div class="coord-data">
+                        <div class="coord-item">
+                            <span class="coord-label">Latitude:</span>
+                            <span class="coord-value">6.4200°N</span>
+                        </div>
+                        <div class="coord-item">
+                            <span class="coord-label">Longitude:</span>
+                            <span class="coord-value">80.5150°E</span>
+                        </div>
+                        <div class="coord-item">
+                            <span class="coord-label">Type:</span>
+                            <span class="coord-value">Geological Formation</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="coordinates-card glass-effect">
+                    <div class="coord-header">
+                        <h3>🌳 Sinharaja Border</h3>
+                        <div class="coord-badge">UNESCO Heritage</div>
+                    </div>
+                    <div class="coord-data">
+                        <div class="coord-item">
+                            <span class="coord-label">Latitude:</span>
+                            <span class="coord-value">6.3700°N</span>
+                        </div>
+                        <div class="coord-item">
+                            <span class="coord-label">Longitude:</span>
+                            <span class="coord-value">80.4800°E</span>
+                        </div>
+                        <div class="coord-item">
+                            <span class="coord-label">Status:</span>
+                            <span class="coord-value">Protected Area</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- GeoJSON Display Section -->
+    <section class="content-section">
+        <div class="container">
+            <div class="section-header">
+                <h2>🧾 Raw Geographic Data</h2>
+                <p class="section-subtitle">Complete GeoJSON structure for GIS applications</p>
+            </div>
+
+            <div class="geojson-display glass-effect">
+                <div class="code-header">
+                    <h3>📄 Rambuka Village GeoJSON</h3>
+                    <button class="btn btn-small" onclick="copyGeoJSON()">
+                        <span>📋</span> Copy
+                    </button>
+                </div>
+                <pre id="geoJsonDisplay" class="code-block" aria-label="GeoJSON Data" style="overflow-x:auto;white-space:pre-wrap;word-break:break-word;"></pre>
+                <div class="geojson-help" style="margin-top:1rem;color:var(--forest-green);font-size:1rem;">
+                    <span>ℹ️ This is technical data for GIS users. Most visitors can ignore this section.</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Data Export Section -->
+    <section class="page-section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">📤 Data Export & Integration</h2>
+                <p class="section-description">Export geographic data for research, planning, and GIS applications</p>
+            </div>
+
+            <div class="export-grid">
+                <div class="export-card glass-effect">
+                    <div class="export-icon">📁</div>
+                    <h3>GeoJSON Format</h3>
+                    <p>Industry-standard geographic data format compatible with QGIS, ArcGIS, and web mapping libraries.</p>
+                    <div class="export-features">
+                        <span class="feature-tag">Vector Data</span>
+                        <span class="feature-tag">Coordinate Precision</span>
+                        <span class="feature-tag">Attribute Data</span>
+                    </div>
+                    <button class="btn btn-primary" onclick="downloadGeoJSON()">
+                        Download GeoJSON
+                    </button>
+                </div>
+
+                <div class="export-card glass-effect">
+                    <div class="export-icon">📊</div>
+                    <h3>CSV Format</h3>
+                    <p>Tabular data format perfect for spreadsheet analysis, statistical software, and database import.</p>
+                    <div class="export-features">
+                        <span class="feature-tag">Tabular Format</span>
+                        <span class="feature-tag">Excel Compatible</span>
+                        <span class="feature-tag">Analysis Ready</span>
+                    </div>
+                    <button class="btn btn-secondary" onclick="downloadCSV()">
+                        Download CSV
+                    </</div>
+
+                <div class="export-card glass-effect">
+                    <div class="export-icon">🔗</div>
+                    <h3>API Access</h3>
+                    <p>Programmatic access to real-time geographic data through RESTful API endpoints.</p>
+                    <div class="export-features">
+                        <span class="feature-tag">Real-time Data</span>
+                        <span class="feature-tag">JSON Response</span>
+                        <span class="feature-tag">Rate Limited</span>
+                    </div>
+                    <button class="btn btn-tertiary" onclick="showAPIInfo()">
+                        API Documentation
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Landscape Profile Section -->
+    <section class="page-section landscape-profile-section" style="min-height: 40vh; position: relative;">
+        <div class="container" style="background: rgba(255,255,255,0.7); border-radius: 1rem; padding: 2rem; box-shadow: 0 4px 24px rgba(76,140,74,0.08);">
+            <div class="section-header">
+                <h2 class="section-title">Landscape Profile</h2>
+                <p class="section-description">Explore the diverse landforms and scenic beauty of Rambuka Village.</p>
+            </div>
+
+            <div class="landscape-gallery grid grid-3">
+                <div class="gallery-item glass-effect">
+                    <img src="Photos/landscape1.jpg" alt="Landscape 1" class="gallery-image">
+                    <div class="image-overlay">
+                        <div class="image-info">
+                            <h3>🌄 Sunrise View</h3>
+                            <p>Stunning sunrise over the mountains, illuminating the village in golden light.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="gallery-item glass-effect">
+                    <img src="Photos/landscape2.jpg" alt="Landscape 2" class="gallery-image">
+                    <div class="image-overlay">
+                        <div class="image-info">
+                            <h3🏞️ Nature Trail</h3>
+                            <p>Explore the lush greenery and vibrant flora along the nature trails of Rambuka.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="gallery-item glass-effect">
+                    <img src="Photos/landscape3.jpg" alt="Landscape 3" class="gallery-image">
+                    <div class="image-overlay">
+                        <div class="image-info">
+                            <h3>🌊 Waterfall Escape</h3>
+                            <p>Relax by the serene waterfall, a hidden gem in the heart of the village.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="landscape-description" style="margin-top: 2rem;">
+                <h3>Rambuka's Diverse Landscapes</h3>
+                <p>
+                    Rambuka Village is blessed with a variety of stunning landscapes, from majestic mountains and lush forests to tranquil waterfalls and vibrant agricultural fields. 
+                    This section showcases the natural beauty and diverse landforms that make Rambuka a unique and picturesque destination.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>🏞️ Rambuka Village</h3>
+                    <p>A pristine village nestled in the heart of Sri Lanka's rainforest region, where tradition meets conservation.</p>
+                    <div class="social-links">
+                        <a href="#" aria-label="Facebook"><span>📘</span></a>
+                        <a href="#" aria-label="Twitter"><span>🐦</span></a>
+                        <a href="#" aria-label="Instagram"><span>📷</span></a>
+                    </div>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="history.html">History</a></li>
+                        <li><a href="population.html">Population</a></li>
+                        <li><a href="geography.html">Geography</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Explore</h4>
+                    <ul>
+                        <li><a href="environment.html">Environment</a></li>
+                        <li><a href="geoportal.html">Geo Portal</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Contact Info</h4>
+                    <p>📍 Rambuka Village, Sabaragamuwa Province, Sri Lanka</p>
+                    <p>📞 +94 XX XXX XXXX</p>
+                    <p>✉️ info@rambukavillage.lk</p>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2024 Rambuka Village. All rights reserved. | Designed with 💚 for nature conservation</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="assets/js/main.js"></script>
+    <!-- Leaflet JS for Interactive Maps -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+            integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+            crossorigin=""></script>
+    
+    <script>
+        // Geoportal-specific functionality
+        let map;
+        let markers = {};
+        let layerGroups = {};
+
+        // GeoJSON data structure
+        const geoJsonData = {
+            "type": "FeatureCollection",
+            "features": [
+                {
+                    "type": "Feature",
+                    "properties": {
+                        "name": "Rambuka Village Center",
+                        "type": "settlement",
+                        "population": 2318,
+                        "area_km2": 1159,
+                        "description": "Main village center with community facilities"
+                    },
+                    "geometry": {
+                        "type": "Point",
+                        "coordinates": [80.5000, 6.4000]
+                    }
+                },
+                {
+                    "type": "Feature",
+                    "properties": {
+                        "name": "Stone Columns",
+                        "type": "attraction",
+                        "description": "Ancient geological formations and main tourist attraction"
+                    },
+                    "geometry": {
+                        "type": "Point",
+                        "coordinates": [80.5150, 6.4200]
+                    }
+                },
+                {
+                    "type": "Feature",
+                    "properties": {
+                        "name": "Sinharaja Forest Border",
+                        "type": "conservation",
+                        "description": "UNESCO World Heritage Site border with rich biodiversity"
+                    },
+                    "geometry": {
+                        "type": "Point",
+                        "coordinates": [80.4800, 6.3700]
+                    }
+                },
+                {
+                    "type": "Feature",
+                    "properties": {
+                        "name": "Mountain Stream",
+                        "type": "water_source",
+                        "description": "Year-round fresh water source from mountain springs"
+                    },
+                    "geometry": {
+                        "type": "Point",
+                        "coordinates": [80.4900, 6.4100]
+                    }
+                },
+                {
+                    "type": "Feature",
+                    "properties": {
+                        "name": "Agricultural Zone",
+                        "type": "agriculture",
+                        "description": "Traditional farming area with rice paddies and spice gardens"
+                    },
+                    "geometry": {
+                        "type": "Point",
+                        "coordinates": [80.5200, 6.3850]
+                    }
+                },
+                {
+                    "type": "Feature",
+                    "properties": {
+                        "name": "Village Boundary",
+                        "type": "administrative",
+                        "description": "Approximate administrative boundary of Rambuka Village"
+                    },
+                    "geometry": {
+                        "type": "Polygon",
+                        "coordinates": [[
+                            [80.4700, 6.4400],
+                            [80.5400, 6.4400],
+                            [80.5400, 6.3500],
+                            [80.4700, 6.3500],
+                            [80.4700, 6.4400]
+                        ]]
+                    }
+                }
+            ]
+        };
+
+        // Initialize the geoportal application
+        document.addEventListener('DOMContentLoaded', function() {
+            const app = new RambukaApp();
+            initializeMap();
+            displayGeoJSON();
+        });
+
+        // Initialize Leaflet map
+        function initializeMap() {
+            // Center coordinates for Rambuka Village
+            const centerLat = 6.4000;
+            const centerLng = 80.5000;
+
+            // Initialize map
+            map = L.map('map').setView([centerLat, centerLng], 13);
+
+            // Add OpenStreetMap tiles
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+                maxZoom: 18
+            }).addTo(map);
+
+            // Initialize layer groups
+            layerGroups = {
+                village: L.layerGroup().addTo(map),
+                attractions: L.layerGroup().addTo(map),
+                conservation: L.layerGroup().addTo(map),
+                water: L.layerGroup().addTo(map),
+                agriculture: L.layerGroup().addTo(map),
+                boundary: L.layerGroup().addTo(map)
+            };
+
+            // Add markers for each feature
+            geoJsonData.features.forEach(feature => {
+                if (feature.geometry.type === 'Point') {
+                    const [lng, lat] = feature.geometry.coordinates;
+                    const props = feature.properties;
+                    
+                    let icon = '📍';
+                    let layerGroup = layerGroups.village;
+                    
+                    switch(props.type) {
+                        case 'settlement':
+                            icon = '🏘️';
+                            layerGroup = layerGroups.village;
+                            break;
+                        case 'attraction':
+                            icon = '🗿';
+                            layerGroup = layerGroups.attractions;
+                            break;
+                        case 'conservation':
+                            icon = '🌳';
+                            layerGroup = layerGroups.conservation;
+                            break;
+                        case 'water_source':
+                            icon = '💧';
+                            layerGroup = layerGroups.water;
+                            break;
+                        case 'agriculture':
+                            icon = '🌾';
+                            layerGroup = layerGroups.agriculture;
+                            break;
+                    }
+                    
+                    const marker = L.marker([lat, lng])
+                        .bindPopup(`<b>${icon} ${props.name}</b><br>${props.description}`)
+                        .addTo(layerGroup);
+                        
+                    markers[props.type] = markers[props.type] || [];
+                    markers[props.type].push(marker);
+                } else if (feature.geometry.type === 'Polygon') {
+                    const coords = feature.geometry.coordinates[0].map(coord => [coord[1], coord[0]]);
+                    const polygon = L.polygon(coords, {
+                        color: '#4C8C4A',
+                        fillColor: '#CDE8C4',
+                        fillOpacity: 0.3,
+                        weight: 2
+                    }).bindPopup(`<b>${feature.properties.name}</b><br>${feature.properties.description}`)
+                      .addTo(layerGroups.boundary);
+                }
+            });
+        }
+
+        // Display GeoJSON in the code block
+        function displayGeoJSON() {
+            const geoJsonDisplay = document.getElementById('geoJsonDisplay');
+            geoJsonDisplay.textContent = JSON.stringify(geoJsonData, null, 2);
+        }
+
+        // Toggle layer panel
+        function toggleLayerPanel() {
+            const panel = document.getElementById('layerPanel');
+            panel.style.display = panel.style.display === 'none' ? 'block' : 'none';
+        }
+
+        // Layer toggle functions
+        function toggleVillageLayer() {
+            const checkbox = document.getElementById('villageLayer');
+            if (checkbox.checked) {
+                map.addLayer(layerGroups.village);
+            } else {
+                map.removeLayer(layerGroups.village);
+            }
+        }
+
+        function toggleAttractionsLayer() {
+            const checkbox = document.getElementById('attractionsLayer');
+            if (checkbox.checked) {
+                map.addLayer(layerGroups.attractions);
+            } else {
+                map.removeLayer(layerGroups.attractions);
+            }
+        }
+
+        function toggleConservationLayer() {
+            const checkbox = document.getElementById('conservationLayer');
+            if (checkbox.checked) {
+                map.addLayer(layerGroups.conservation);
+            } else {
+                map.removeLayer(layerGroups.conservation);
+            }
+        }
+
+        function toggleWaterLayer() {
+            const checkbox = document.getElementById('waterLayer');
+            if (checkbox.checked) {
+                map.addLayer(layerGroups.water);
+            } else {
+                map.removeLayer(layerGroups.water);
+            }
+        }
+
+        function toggleAgricultureLayer() {
+            const checkbox = document.getElementById('agricultureLayer');
+            if (checkbox.checked) {
+                map.addLayer(layerGroups.agriculture);
+            } else {
+                map.removeLayer(layerGroups.agriculture);
+            }
+        }
+
+        function toggleBoundaryLayer() {
+            const checkbox = document.getElementById('boundaryLayer');
+            if (checkbox.checked) {
+                map.addLayer(layerGroups.boundary);
+            } else {
+                map.removeLayer(layerGroups.boundary);
+            }
+        }
+
+        // Reset map view
+        function resetMap() {
+            map.setView([6.4000, 80.5000], 13);
+        }
+
+        // Download GeoJSON data
+        function downloadGeoJSON() {
+            const dataStr = JSON.stringify(geoJsonData, null, 2);
+            const dataBlob = new Blob([dataStr], { type: 'application/json' });
+            const url = URL.createObjectURL(dataBlob);
+            const link = document.createElement('a');
+            link.href = url;
+            link.download = 'rambuka_village.geojson';
+            link.click();
+            URL.revokeObjectURL(url);
+
+            // Show success notification
+            showNotification('✅ GeoJSON file downloaded successfully!', 'success');
+        }
+
+        // Download CSV data
+        function downloadCSV() {
+            const csvData = `Name,Type,Latitude,Longitude,Description
+Rambuka Village Center,Settlement,6.4000,80.5000,"Population: 2318, Area: 1159 km²"
+Stone Columns,Attraction,6.4200,80.5150,Ancient geological formation
+Sinharaja Forest Border,Conservation,6.3700,80.4800,UNESCO World Heritage Site
+Mountain Stream,Water Source,6.4100,80.4900,Year-round fresh water
+Agricultural Zone,Agriculture,6.3850,80.5200,Traditional farming area`;
+
+            const dataBlob = new Blob([csvData], { type: 'text/csv' });
+            const url = URL.createObjectURL(dataBlob);
+            const link = document.createElement('a');
+            link.href = url;
+            link.download = 'rambuka_village_data.csv';
+            link.click();
+            URL.revokeObjectURL(url);
+
+            showNotification('✅ CSV file downloaded successfully!', 'success');
+        }
+
+        // Copy GeoJSON to clipboard
+        function copyGeoJSON() {
+            const geoJsonText = JSON.stringify(geoJsonData, null, 2);
+            navigator.clipboard.writeText(geoJsonText).then(() => {
+                showNotification('📋 GeoJSON copied to clipboard!', 'info');
+            }).catch(err => {
+                console.error('Failed to copy: ', err);
+                showNotification('❌ Failed to copy to clipboard', 'error');
+            });
+        }
+
+        // Show API information
+        function showAPIInfo() {
+            const apiInfo = `
+Rambuka Village Geographic API
+
+Base URL: https://api.rambukavillage.lk/v1/
+
+Endpoints:
+• GET /features - All geographic features
+• GET /features/{id} - Specific feature
+• GET /boundaries - Village boundaries
+• GET /export/geojson - GeoJSON export
+• GET /export/csv - CSV export
+
+Authentication: API key required
+Rate Limit: 100 requests/hour
+
+Example:
+curl -H "X-API-Key: YOUR_KEY" https://api.rambukavillage.lk/v1/features
+            `;
+            
+            alert(apiInfo);
+        }
+
+        // Utility function for notifications
+        function showNotification(message, type) {
+            const notification = document.createElement('div');
+            notification.className = `notification ${type}`;
+            notification.textContent = message;
+            notification.style.cssText = `
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                padding: 12px 20px;
+                border-radius: 8px;
+                color: white;
+                font-weight: 500;
+                z-index: 10000;
+                animation: slideIn 0.3s ease;
+            `;
+            
+            switch(type) {
+                case 'success':
+                    notification.style.backgroundColor = '#10b981';
+                    break;
+                case 'error':
+                    notification.style.backgroundColor = '#ef4444';
+                    break;
+                case 'info':
+                    notification.style.backgroundColor = '#3b82f6';
+                    break;
+            }
+            
+            document.body.appendChild(notification);
+            
+            setTimeout(() => {
+                notification.style.animation = 'slideOut 0.3s ease';
+                setTimeout(() => document.body.removeChild(notification), 300);
+            }, 3000);
+        }
+
+        // Add CSS for notifications
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes slideIn {
+                from { transform: translateX(100%); opacity: 0; }
+                to { transform: translateX(0); opacity: 1; }
+            }
+            @keyframes slideOut {
+                from { transform: translateX(0); opacity: 1; }
+                to { transform: translateX(100%); opacity: 0; }
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+</body>
+</html>

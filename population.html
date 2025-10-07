@@ -1,0 +1,649 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Population Demographics - Rambuka Village Community Profile</title>
+    <meta
+      name="description"
+      content="Explore detailed population demographics of Rambuka Village including age distribution, education levels, occupations, and community characteristics."
+    />
+    <meta
+      name="keywords"
+      content="Rambuka Village population, demographics, community profile, Sri Lanka village statistics"
+    />
+
+    <!-- Favicon -->
+    <link
+      rel="icon"
+      type="image/svg+xml"
+      href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>👥</text></svg>"
+    />
+
+    <!-- Google Fonts -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.js"></script>
+
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="assets/css/styles.css" />
+  </head>
+
+  <body style="position: relative; min-height: 100vh;">
+    <div
+      style="
+        position: fixed;
+        inset: 0;
+        z-index: 0;
+        pointer-events: none;
+      "
+    >
+      <img
+        src="Photos/Population.png"
+        alt="Population Background"
+        style="
+          width: 100vw;
+          height: 100vh;
+          object-fit: cover;
+          filter: blur(16px) brightness(0.7);
+          opacity: 0.6;
+        "
+      />
+    </div>
+    <div
+      id="main-content"
+      style="
+        position: relative;
+        z-index: 1;
+        background: rgba(255, 255, 255, 0.25);
+        border-radius: 1rem;
+        box-shadow: 0 4px 24px rgba(76, 140, 74, 0.08);
+        backdrop-filter: blur(4px);
+        margin: 2rem auto;
+        max-width: 1100px;
+        padding: 2rem;
+      "
+    >
+      <!-- Navigation -->
+      <nav class="navbar">
+        <div class="nav-container">
+          <a href="index.html" class="nav-logo"> 🌿 Rambuka Village </a>
+
+          <button
+            class="mobile-menu-toggle"
+            aria-label="Toggle navigation menu"
+            aria-expanded="false"
+          >
+            ☰ Menu
+          </button>
+
+          <ul class="nav-menu" id="navMenu">
+            <li><a href="index.html" class="nav-link">Home</a></li>
+            <li><a href="history.html" class="nav-link">History</a></li>
+            <li>
+              <a href="population.html" class="nav-link active">Population</a>
+            </li>
+            <li><a href="geography.html" class="nav-link">Geography</a></li>
+            <li><a href="environment.html" class="nav-link">Environment</a></li>
+            <li><a href="geoportal.html" class="nav-link">Geo-Portal</a></li>
+            <li><a href="contact.html" class="nav-link">Contact</a></li>
+          </ul>
+          <button id="darkModeToggle" aria-label="Toggle dark mode" style="margin-left:1rem; font-size:1.3rem; background:var(--glass-bg); border:none; border-radius:50%; padding:0.5rem 0.7rem; cursor:pointer; color:var(--forest-green); transition:background 0.3s;">🌙</button>
+        </div>
+      </nav>
+
+      <!-- Hero Section -->
+      <section class="page-section">
+        <div class="container">
+          <div class="section-header">
+            <h1 class="section-title">👥 Population Demographics</h1>
+            <p class="section-description">
+              Discover the vibrant community of Rambuka Village - a balanced and
+              close-knit population living in harmony with nature and preserving
+              traditional Sri Lankan values.
+            </p>
+          </div>
+
+          <!-- Key Statistics Overview -->
+          <div class="grid grid-4" style="margin-top: 3rem">
+            <div class="card animate-fade-in text-center">
+              <span class="card-icon">👥</span>
+              <h3
+                class="card-title"
+                style="font-size: 2.5rem; margin-bottom: 0.5rem"
+              >
+                2,318
+              </h3>
+              <p class="card-text" style="font-weight: 600; margin: 0">
+                Total Population
+              </p>
+            </div>
+
+            <div class="card animate-fade-in text-center">
+              <span class="card-icon">👨</span>
+              <h3
+                class="card-title"
+                style="font-size: 2.5rem; margin-bottom: 0.5rem"
+              >
+                1,149
+              </h3>
+              <p class="card-text" style="font-weight: 600; margin: 0">
+                Male (49.6%)
+              </p>
+            </div>
+
+            <div class="card animate-fade-in text-center">
+              <span class="card-icon">👩</span>
+              <h3
+                class="card-title"
+                style="font-size: 2.5rem; margin-bottom: 0.5rem"
+              >
+                1,169
+              </h3>
+              <p class="card-text" style="font-weight: 600; margin: 0">
+                Female (50.4%)
+              </p>
+            </div>
+
+            <div class="card animate-fade-in text-center">
+              <span class="card-icon">📏</span>
+              <h3
+                class="card-title"
+                style="font-size: 2.5rem; margin-bottom: 0.5rem"
+              >
+                2/km²
+              </h3>
+              <p class="card-text" style="font-weight: 600; margin: 0">
+                Population Density
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Population Analysis -->
+      <section class="page-section" style="background: rgba(255, 255, 255, 0.05)">
+        <div class="container">
+          <div class="grid grid-2" style="gap: 3rem">
+            <!-- Population Chart -->
+            <div class="glass-container animate-fade-in">
+              <h3 style="text-align: center; margin-bottom: 2rem">
+                Gender Distribution
+              </h3>
+              <div class="chart-container">
+                <canvas id="populationChart"></canvas>
+              </div>
+            </div>
+
+            <!-- Detailed Statistics -->
+            <div class="glass-container animate-fade-in">
+              <h3 style="margin-bottom: 2rem">📊 Population Statistics</h3>
+
+              <div style="display: flex; flex-direction: column; gap: 1rem">
+                <div class="card" style="padding: 1rem">
+                  <div
+                    style="
+                      display: flex;
+                      justify-content: space-between;
+                      align-items: center;
+                    "
+                  >
+                    <span style="font-weight: 600">Total Population:</span>
+                    <span style="font-weight: 700; color: var(--forest-green)"
+                      >2,318 people</span
+                    >
+                  </div>
+                </div>
+
+                <div class="card" style="padding: 1rem">
+                  <div
+                    style="
+                      display: flex;
+                      justify-content: space-between;
+                      align-items: center;
+                    "
+                  >
+                    <span style="font-weight: 600">Male Population:</span>
+                    <span style="font-weight: 700; color: var(--forest-green)"
+                      >1,149 (49.6%)</span
+                    >
+                  </div>
+                </div>
+
+                <div class="card" style="padding: 1rem">
+                  <div
+                    style="
+                      display: flex;
+                      justify-content: space-between;
+                      align-items: center;
+                    "
+                  >
+                    <span style="font-weight: 600">Female Population:</span>
+                    <span style="font-weight: 700; color: var(--forest-green)"
+                      >1,169 (50.4%)</span
+                    >
+                  </div>
+                </div>
+
+                <div class="card" style="padding: 1rem">
+                  <div
+                    style="
+                      display: flex;
+                      justify-content: space-between;
+                      align-items: center;
+                    "
+                  >
+                    <span style="font-weight: 600">Population Density:</span>
+                    <span style="font-weight: 700; color: var(--forest-green)"
+                      >2 per km²</span
+                    >
+                  </div>
+                </div>
+
+                <div class="card" style="padding: 1rem">
+                  <div
+                    style="
+                      display: flex;
+                      justify-content: space-between;
+                      align-items: center;
+                    "
+                  >
+                    <span style="font-weight: 600">Total Area:</span>
+                    <span style="font-weight: 700; color: var(--forest-green)"
+                      >1,159 km²</span
+                    >
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Community Characteristics -->
+      <section class="page-section">
+        <div class="container">
+          <div class="section-header">
+            <h2 class="section-title">🏘️ Community Characteristics</h2>
+            <p class="section-description">
+              The unique social fabric that makes Rambuka Village a special place
+              to live
+            </p>
+          </div>
+
+          <div class="glass-container animate-fade-in-up">
+            <div class="grid grid-2" style="gap: 3rem; align-items: center">
+              <div>
+                <h3 style="margin-bottom: 1.5rem">Strong Community Bonds</h3>
+                <p style="margin-bottom: 1rem">
+                  The low population density reflects the village's spacious,
+                  rural character. Families are traditionally large and
+                  multi-generational, with strong community bonds and mutual
+                  support systems.
+                </p>
+                <p style="margin-bottom: 2rem">
+                  Most residents are engaged in agriculture, eco-tourism, or
+                  traditional crafts, maintaining a sustainable lifestyle that
+                  respects the surrounding environment.
+                </p>
+
+                <div
+                  style="
+                    display: grid;
+                    grid-template-columns: repeat(2, 1fr);
+                    gap: 1rem;
+                  "
+                >
+                  <div
+                    style="
+                      text-align: center;
+                      background: rgba(255, 255, 255, 0.3);
+                      padding: 1rem;
+                      border-radius: 10px;
+                    "
+                  >
+                    <div style="font-size: 2rem; margin-bottom: 0.5rem">🌾</div>
+                    <div style="font-weight: 600">65%</div>
+                    <div style="font-size: 0.9rem">Agriculture</div>
+                  </div>
+                  <div
+                    style="
+                      text-align: center;
+                      background: rgba(255, 255, 255, 0.3);
+                      padding: 1rem;
+                      border-radius: 10px;
+                    "
+                  >
+                    <div style="font-size: 2rem; margin-bottom: 0.5rem">🏞️</div>
+                    <div style="font-weight: 600">20%</div>
+                    <div style="font-size: 0.9rem">Eco-tourism</div>
+                  </div>
+                  <div
+                    style="
+                      text-align: center;
+                      background: rgba(255, 255, 255, 0.3);
+                      padding: 1rem;
+                      border-radius: 10px;
+                    "
+                  >
+                    <div style="font-size: 2rem; margin-bottom: 0.5rem">🎨</div>
+                    <div style="font-weight: 600">15%</div>
+                    <div style="font-size: 0.9rem">Traditional Crafts</div>
+                  </div>
+                  <div
+                    style="
+                      text-align: center;
+                      background: rgba(255, 255, 255, 0.3);
+                      padding: 1rem;
+                      border-radius: 10px;
+                    "
+                  >
+                    <div style="font-size: 2rem; margin-bottom: 0.5rem">4.2</div>
+                    <div style="font-weight: 600">People</div>
+                    <div style="font-size: 0.9rem">Average Household</div>
+                  </div>
+                </div>
+              </div>
+
+              <div>
+                <div
+                  style="
+                    background: linear-gradient(
+                      135deg,
+                      var(--forest-green),
+                      var(--light-olive)
+                    );
+                    color: white;
+                    padding: 2rem;
+                    border-radius: 20px;
+                    text-align: center;
+                  "
+                >
+                  <h4 style="margin-bottom: 1rem; color: white">
+                    Community Spirit
+                  </h4>
+                  <div style="font-size: 4rem; margin: 1rem 0">🤝</div>
+                  <p style="margin: 0; color: white">
+                    Our village thrives on cooperation, shared traditions, and
+                    collective responsibility for preserving our natural
+                    environment and cultural heritage.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Call to Action -->
+      <section class="page-section" style="background: rgba(76, 140, 74, 0.1)">
+        <div class="container">
+          <div class="glass-container text-center animate-fade-in">
+            <h2 style="margin-bottom: 1rem">A Thriving Community</h2>
+            <p
+              style="
+                font-size: 1.1rem;
+                margin-bottom: 2rem;
+                max-width: 600px;
+                margin-left: auto;
+                margin-right: auto;
+              "
+            >
+              Rambuka Village's balanced demographics and strong community bonds
+              create an ideal environment for sustainable development and cultural
+              preservation. Explore more aspects of our vibrant community.
+            </p>
+
+            <div
+              style="
+                display: flex;
+                gap: 1rem;
+                justify-content: center;
+                flex-wrap: wrap;
+              "
+            >
+              <a href="geography.html" class="btn btn-primary"
+                >🏔️ Explore Geography</a
+              >
+              <a href="environment.html" class="btn btn-glass"
+                >🌿 Discover Environment</a
+              >
+              <a href="contact.html" class="btn btn-outline"
+                >📞 Connect With Us</a
+              >
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Footer -->
+      <footer class="footer">
+        <div class="container">
+          <div
+            class="grid grid-auto-fit"
+            style="
+              grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+              gap: 2rem;
+              margin-bottom: 2rem;
+            "
+          >
+            <div class="footer-section">
+              <h4 style="color: var(--light-green); margin-bottom: 1rem">
+                🌿 Rambuka Village
+              </h4>
+              <p>
+                A beautiful village nestled near the UNESCO World Heritage
+                Sinharaja Rain Forest, showcasing rich biodiversity and
+                traditional Sri Lankan culture.
+              </p>
+              <div style="display: flex; gap: 1rem; margin-top: 1rem">
+                <span>🌍</span>
+                <span>🌳</span>
+                <span>🏘️</span>
+              </div>
+            </div>
+
+            <div class="footer-section">
+              <h5 style="color: var(--light-green); margin-bottom: 1rem">
+                Quick Links
+              </h5>
+              <ul style="list-style: none; padding: 0; margin: 0">
+                <li style="margin-bottom: 0.5rem">
+                  <a
+                    href="index.html"
+                    style="color: white; text-decoration: none"
+                    >🏠 Home</a
+                  >
+                </li>
+                <li style="margin-bottom: 0.5rem">
+                  <a
+                    href="history.html"
+                    style="color: white; text-decoration: none"
+                    >📜 History</a
+                  >
+                </li>
+                <li style="margin-bottom: 0.5rem">
+                  <a
+                    href="population.html"
+                    style="color: white; text-decoration: none"
+                    >👥 Population</a
+                  >
+                </li>
+                <li style="margin-bottom: 0.5rem">
+                  <a
+                    href="geography.html"
+                    style="color: white; text-decoration: none"
+                    >🏔️ Geography</a
+                  >
+                </li>
+                <li style="margin-bottom: 0.5rem">
+                  <a
+                    href="environment.html"
+                    style="color: white; text-decoration: none"
+                    >🌿 Environment</a
+                  >
+                </li>
+              </ul>
+            </div>
+
+            <div class="footer-section">
+              <h5 style="color: var(--light-green); margin-bottom: 1rem">
+                Resources
+              </h5>
+              <ul style="list-style: none; padding: 0; margin: 0">
+                <li style="margin-bottom: 0.5rem">
+                  <a
+                    href="geoportal.html"
+                    style="color: white; text-decoration: none"
+                    >🗺️ Geo-Portal</a
+                  >
+                </li>
+                <li style="margin-bottom: 0.5rem">
+                  <a
+                    href="contact.html"
+                    style="color: white; text-decoration: none"
+                    >📞 Contact</a
+                  >
+                </li>
+                <li style="margin-bottom: 0.5rem">
+                  <a
+                    href="#"
+                    onclick="downloadGeoJSON()"
+                    style="color: white; text-decoration: none"
+                    >📄 Download GeoJSON</a
+                  >
+                </li>
+                <li style="margin-bottom: 0.5rem">
+                  <a
+                    href="#"
+                    onclick="downloadCSV()"
+                    style="color: white; text-decoration: none"
+                    >📊 Download Data</a
+                  >
+                </li>
+              </ul>
+            </div>
+
+            <div class="footer-section">
+              <h5 style="color: var(--light-green); margin-bottom: 1rem">
+                Contact Info
+              </h5>
+              <div style="font-size: 0.9rem; line-height: 1.6">
+                <p style="margin: 0.5rem 0">
+                  📍 Rambuka Village<br />Near Sinharaja Rain Forest<br />Sri
+                  Lanka
+                </p>
+                <p style="margin: 0.5rem 0">📧 info@rambukavillage.lk</p>
+                <p style="margin: 0.5rem 0">🌐 Population: 2,318</p>
+                <p style="margin: 0.5rem 0">📏 Area: 1,159 km²</p>
+              </div>
+            </div>
+          </div>
+
+          <div
+            style="
+              border-top: 1px solid rgba(255, 255, 255, 0.2);
+              padding-top: 2rem;
+              text-align: center;
+            "
+          >
+            <p style="margin: 0.5rem 0; font-size: 0.9rem">
+              © 2025 Rambuka Village Website. Created for
+              <a href="https://uom.lk" style="color: var(--light-green)"
+                >University of Moratuwa</a
+              >
+            </p>
+            <p style="margin: 0.5rem 0; font-size: 0.9rem">
+              Department of Town & Country Planning | GIS & Remote Sensing
+            </p>
+            <p style="margin: 0.5rem 0; font-size: 0.8rem; opacity: 0.8">
+              Built with modern web technologies for educational and research
+              purposes
+            </p>
+          </div>
+        </div>
+      </footer>
+
+      <!-- Scroll to Top Button -->
+      <button
+        id="scrollTop"
+        class="scroll-to-top"
+        aria-label="Scroll to top"
+        onclick="scrollToTop()"
+      >
+        ↑
+      </button>
+
+      <!-- JavaScript -->
+      <script src="assets/js/main.js"></script>
+      <script>
+        const darkModeToggle = document.getElementById('darkModeToggle');
+        darkModeToggle.addEventListener('click', function() {
+          document.body.classList.toggle('dark-mode');
+          if(document.body.classList.contains('dark-mode')) {
+            darkModeToggle.textContent = '☀️';
+            localStorage.setItem('theme', 'dark');
+          } else {
+            darkModeToggle.textContent = '🌙';
+            localStorage.setItem('theme', 'light');
+          }
+        });
+        if(localStorage.getItem('theme') === 'dark') {
+          document.body.classList.add('dark-mode');
+          darkModeToggle.textContent = '☀️';
+        }
+      </script>
+    </div>
+  </body>
+</html>
+
+<style>
+body.dark-mode {
+  background: linear-gradient(135deg, #222 0%, #333 50%, #222 100%) !important;
+  color: #e0e0e0 !important;
+}
+body.dark-mode .container,
+body.dark-mode #main-content {
+  background: rgba(30,30,30,0.7) !important;
+  color: #e0e0e0 !important;
+}
+body.dark-mode .navbar,
+body.dark-mode .footer {
+  background: rgba(20,20,20,0.8) !important;
+  color: #e0e0e0 !important;
+}
+body.dark-mode .card,
+body.dark-mode .glass-container,
+body.dark-mode .page-section,
+body.dark-mode .section-header {
+  background: rgba(40,40,40,0.6) !important;
+  color: #e0e0e0 !important;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.2) !important;
+}
+body.dark-mode a,
+body.dark-mode .nav-link {
+  color: #90ee90 !important;
+}
+body.dark-mode .btn {
+  background: #333 !important;
+  color: #90ee90 !important;
+  border-color: #90ee90 !important;
+}
+body.dark-mode .btn-primary {
+  background: #4c8c4a !important;
+  color: #fff !important;
+}
+body.dark-mode .btn-outline {
+  background: transparent !important;
+  color: #90ee90 !important;
+  border-color: #90ee90 !important;
+}
+body.dark-mode .btn-glass {
+  background: rgba(40,40,40,0.4) !important;
+  color: #90ee90 !important;
+}
+</style>

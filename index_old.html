@@ -1,0 +1,1847 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Rambuka Village - Near Sinharaja Rain Forest</title>
+
+    <!-- Google Fonts -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Leaflet CSS for Map -->
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    />
+
+    <!-- Chart.js for Population Chart -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.js"></script>
+
+    <!-- Leaflet JS for Map -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+    <style>
+      /* ==========================================
+           ROOT VARIABLES - COLOR PALETTE
+        ========================================== */
+      :root {
+        --light-green: #cde8c4;
+        --ash-gray: #d9d9d9;
+        --forest-green: #4c8c4a;
+        --charcoal-gray: #333333;
+        --light-olive: #a9cba6;
+        --soft-beige: #f5f5f0;
+        --white: #ffffff;
+        --glass-bg: rgba(255, 255, 255, 0.15);
+        --glass-border: rgba(255, 255, 255, 0.3);
+      }
+
+      /* ==========================================
+           GLOBAL RESET AND BASE STYLES
+        ========================================== */
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Poppins", sans-serif;
+        background: linear-gradient(
+          135deg,
+          #cde8c4 0%,
+          #a9cba6 50%,
+          #4c8c4a 100%
+        );
+        background-attachment: fixed;
+        color: var(--charcoal-gray);
+        overflow-x: hidden;
+        line-height: 1.6;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      /* ==========================================
+           NAVIGATION BAR - GLASS EFFECT
+        ========================================== */
+      nav {
+        position: fixed;
+        top: 0;
+        width: 100%;
+        background: rgba(255, 255, 255, 0.2);
+        backdrop-filter: blur(15px);
+        -webkit-backdrop-filter: blur(15px);
+        border-bottom: 1px solid var(--glass-border);
+        padding: 1rem 2rem;
+        z-index: 1000;
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+      }
+
+      nav .nav-container {
+        max-width: 1400px;
+        margin: 0 auto;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+      }
+
+      nav .logo {
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: var(--forest-green);
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+      }
+
+      nav ul {
+        list-style: none;
+        display: flex;
+        gap: 1rem;
+        flex-wrap: wrap;
+      }
+
+      nav ul li a {
+        text-decoration: none;
+        color: var(--charcoal-gray);
+        padding: 0.5rem 1rem;
+        border-radius: 25px;
+        background: rgba(255, 255, 255, 0.3);
+        backdrop-filter: blur(10px);
+        border: 1px solid var(--glass-border);
+        transition: all 0.3s ease;
+        font-weight: 500;
+        font-size: 0.9rem;
+      }
+
+      nav ul li a:hover,
+      nav ul li a.active {
+        background: var(--forest-green);
+        color: var(--white);
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(76, 140, 74, 0.4);
+      }
+
+      /* Mobile Menu Toggle */
+      .menu-toggle {
+        display: none;
+        background: var(--forest-green);
+        color: white;
+        border: none;
+        padding: 0.5rem 1rem;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 1rem;
+      }
+
+      /* ==========================================
+           SECTION BASE STYLES - GLASS CONTAINERS
+        ========================================== */
+      section {
+        min-height: 100vh;
+        padding: 100px 2rem 50px 2rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .container {
+        max-width: 1200px;
+        width: 100%;
+        background: rgba(255, 255, 255, 0.25);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        border-radius: 30px;
+        border: 1px solid var(--glass-border);
+        padding: 3rem;
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        animation: fadeInUp 0.8s ease;
+      }
+
+      @keyframes fadeInUp {
+        from {
+          opacity: 0;
+          transform: translateY(30px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      /* ==========================================
+           TYPOGRAPHY
+        ========================================== */
+      h1 {
+        font-size: 3rem;
+        color: var(--forest-green);
+        margin-bottom: 1rem;
+        text-align: center;
+        text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.1);
+      }
+
+      h2 {
+        font-size: 2.5rem;
+        color: var(--forest-green);
+        margin-bottom: 1.5rem;
+        text-align: center;
+      }
+
+      h3 {
+        font-size: 1.8rem;
+        color: var(--forest-green);
+        margin-bottom: 1rem;
+      }
+
+      p {
+        margin-bottom: 1rem;
+        font-size: 1.05rem;
+        line-height: 1.8;
+        color: var(--charcoal-gray);
+      }
+
+      /* ==========================================
+           BUTTONS - GLASS EFFECT
+        ========================================== */
+      .btn {
+        display: inline-block;
+        padding: 0.8rem 2rem;
+        background: rgba(76, 140, 74, 0.3);
+        backdrop-filter: blur(10px);
+        border: 2px solid var(--forest-green);
+        color: var(--forest-green);
+        text-decoration: none;
+        border-radius: 30px;
+        font-weight: 600;
+        transition: all 0.3s ease;
+        cursor: pointer;
+        margin: 0.5rem;
+      }
+
+      .btn:hover {
+        background: var(--forest-green);
+        color: var(--white);
+        transform: translateY(-3px);
+        box-shadow: 0 10px 25px rgba(76, 140, 74, 0.4);
+      }
+
+      /* ==========================================
+           HOME SECTION
+        ========================================== */
+      #home {
+        background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 600"><defs><linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color:%23CDE8C4;stop-opacity:1" /><stop offset="100%" style="stop-color:%234C8C4A;stop-opacity:1" /></linearGradient></defs><rect fill="url(%23grad1)" width="1200" height="600"/><path fill="%23A9CBA6" opacity="0.3" d="M0,300 Q300,200 600,300 T1200,300 L1200,600 L0,600 Z"/><path fill="%234C8C4A" opacity="0.2" d="M0,400 Q300,350 600,400 T1200,400 L1200,600 L0,600 Z"/></svg>')
+          no-repeat center center;
+        background-size: cover;
+      }
+
+      .home-content {
+        text-align: center;
+      }
+
+      .home-content h1 {
+        font-size: 4rem;
+        margin-bottom: 0.5rem;
+        animation: slideInDown 1s ease;
+      }
+
+      .home-content .subtitle {
+        font-size: 1.3rem;
+        color: var(--forest-green);
+        margin-bottom: 2rem;
+        font-weight: 500;
+      }
+
+      .home-content p {
+        font-size: 1.2rem;
+        max-width: 800px;
+        margin: 0 auto 2rem auto;
+      }
+
+      @keyframes slideInDown {
+        from {
+          opacity: 0;
+          transform: translateY(-50px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      /* Village Stats Cards */
+      .stats-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 1.5rem;
+        margin-top: 2rem;
+      }
+
+      .stat-card {
+        background: rgba(255, 255, 255, 0.3);
+        backdrop-filter: blur(10px);
+        border-radius: 20px;
+        padding: 1.5rem;
+        border: 1px solid var(--glass-border);
+        text-align: center;
+        transition: transform 0.3s ease;
+      }
+
+      .stat-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+      }
+
+      .stat-card .icon {
+        font-size: 2.5rem;
+        margin-bottom: 0.5rem;
+      }
+
+      .stat-card h3 {
+        font-size: 1.5rem;
+        color: var(--forest-green);
+        margin-bottom: 0.5rem;
+      }
+
+      .stat-card p {
+        font-size: 0.9rem;
+        margin: 0;
+      }
+
+      /* ==========================================
+           HISTORY SECTION
+        ========================================== */
+      .timeline {
+        position: relative;
+        padding: 2rem 0;
+      }
+
+      .timeline-item {
+        background: rgba(255, 255, 255, 0.4);
+        backdrop-filter: blur(10px);
+        border-radius: 15px;
+        padding: 1.5rem;
+        margin-bottom: 1.5rem;
+        border-left: 4px solid var(--forest-green);
+        transition: transform 0.3s ease;
+      }
+
+      .timeline-item:hover {
+        transform: translateX(10px);
+      }
+
+      /* ==========================================
+           POPULATION SECTION
+        ========================================== */
+      .population-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 2rem;
+        margin-top: 2rem;
+      }
+
+      .pop-info {
+        background: rgba(255, 255, 255, 0.3);
+        backdrop-filter: blur(10px);
+        border-radius: 20px;
+        padding: 2rem;
+        border: 1px solid var(--glass-border);
+      }
+
+      .pop-stat {
+        display: flex;
+        justify-content: space-between;
+        padding: 1rem;
+        margin-bottom: 1rem;
+        background: rgba(255, 255, 255, 0.4);
+        border-radius: 10px;
+      }
+
+      .pop-stat span:first-child {
+        font-weight: 600;
+        color: var(--forest-green);
+      }
+
+      #populationChart {
+        max-height: 300px;
+      }
+
+      /* ==========================================
+           TOPOGRAPHY SECTION
+        ========================================== */
+      .topo-features {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 1.5rem;
+        margin-top: 2rem;
+      }
+
+      .feature-card {
+        background: rgba(255, 255, 255, 0.3);
+        backdrop-filter: blur(10px);
+        border-radius: 20px;
+        padding: 2rem;
+        border: 1px solid var(--glass-border);
+        text-align: center;
+        transition: all 0.3s ease;
+      }
+
+      .feature-card:hover {
+        transform: scale(1.05);
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+      }
+
+      .feature-icon {
+        font-size: 3rem;
+        margin-bottom: 1rem;
+      }
+
+      /* SVG Map Illustration */
+      .svg-map {
+        background: rgba(255, 255, 255, 0.2);
+        border-radius: 15px;
+        padding: 2rem;
+        margin-top: 2rem;
+      }
+
+      /* ==========================================
+           HEART OF RAMBUKA SECTION
+        ========================================== */
+      .attractions-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 2rem;
+        margin-top: 2rem;
+      }
+
+      .attraction-card {
+        background: rgba(255, 255, 255, 0.3);
+        backdrop-filter: blur(15px);
+        border-radius: 20px;
+        overflow: hidden;
+        border: 1px solid var(--glass-border);
+        transition: transform 0.3s ease;
+      }
+
+      .attraction-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+      }
+
+      .attraction-image {
+        width: 100%;
+        height: 200px;
+        background: linear-gradient(
+          135deg,
+          var(--forest-green),
+          var(--light-olive)
+        );
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 4rem;
+      }
+
+      .attraction-content {
+        padding: 1.5rem;
+      }
+
+      /* ==========================================
+           LAND USE SECTION
+        ========================================== */
+      .land-use-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 1.5rem;
+        margin-top: 2rem;
+      }
+
+      .land-use-item {
+        background: rgba(255, 255, 255, 0.3);
+        backdrop-filter: blur(10px);
+        border-radius: 15px;
+        padding: 1.5rem;
+        border: 1px solid var(--glass-border);
+        text-align: center;
+      }
+
+      .land-percentage {
+        font-size: 2.5rem;
+        font-weight: 700;
+        color: var(--forest-green);
+        margin: 1rem 0;
+      }
+
+      /* ==========================================
+           CLIMATE SECTION
+        ========================================== */
+      .climate-info {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 2rem;
+        margin-top: 2rem;
+      }
+
+      .climate-card {
+        background: rgba(255, 255, 255, 0.3);
+        backdrop-filter: blur(10px);
+        border-radius: 20px;
+        padding: 2rem;
+        border: 1px solid var(--glass-border);
+        text-align: center;
+      }
+
+      .weather-icon {
+        font-size: 4rem;
+        margin-bottom: 1rem;
+        animation: float 3s ease-in-out infinite;
+      }
+
+      @keyframes float {
+        0%,
+        100% {
+          transform: translateY(0);
+        }
+        50% {
+          transform: translateY(-10px);
+        }
+      }
+
+      .climate-value {
+        font-size: 2rem;
+        font-weight: 700;
+        color: var(--forest-green);
+        margin: 1rem 0;
+      }
+
+      /* ==========================================
+           GEO-PORTAL SECTION
+        ========================================== */
+      #map {
+        width: 100%;
+        height: 500px;
+        border-radius: 20px;
+        margin: 2rem 0;
+        border: 2px solid var(--glass-border);
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+      }
+
+      .map-controls {
+        display: flex;
+        gap: 1rem;
+        flex-wrap: wrap;
+        justify-content: center;
+        margin-top: 1rem;
+      }
+
+      .coordinates-display {
+        background: rgba(255, 255, 255, 0.3);
+        backdrop-filter: blur(10px);
+        border-radius: 15px;
+        padding: 1.5rem;
+        margin-top: 1rem;
+        border: 1px solid var(--glass-border);
+      }
+
+      .coordinates-display pre {
+        background: rgba(0, 0, 0, 0.1);
+        padding: 1rem;
+        border-radius: 10px;
+        overflow-x: auto;
+        font-size: 0.9rem;
+      }
+
+      /* ==========================================
+           CONTACT SECTION
+        ========================================== */
+      .contact-container {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 2rem;
+      }
+
+      .contact-info {
+        background: rgba(255, 255, 255, 0.3);
+        backdrop-filter: blur(10px);
+        border-radius: 20px;
+        padding: 2rem;
+        border: 1px solid var(--glass-border);
+      }
+
+      .contact-form {
+        background: rgba(255, 255, 255, 0.3);
+        backdrop-filter: blur(10px);
+        border-radius: 20px;
+        padding: 2rem;
+        border: 1px solid var(--glass-border);
+      }
+
+      .form-group {
+        margin-bottom: 1.5rem;
+      }
+
+      .form-group label {
+        display: block;
+        margin-bottom: 0.5rem;
+        font-weight: 600;
+        color: var(--forest-green);
+      }
+
+      .form-group input,
+      .form-group textarea {
+        width: 100%;
+        padding: 0.8rem;
+        border-radius: 10px;
+        border: 1px solid var(--glass-border);
+        background: rgba(255, 255, 255, 0.5);
+        backdrop-filter: blur(5px);
+        font-family: "Poppins", sans-serif;
+        transition: all 0.3s ease;
+      }
+
+      .form-group input:focus,
+      .form-group textarea:focus {
+        outline: none;
+        border-color: var(--forest-green);
+        box-shadow: 0 0 10px rgba(76, 140, 74, 0.3);
+      }
+
+      /* ==========================================
+           FOOTER
+        ========================================== */
+      footer {
+        background: rgba(51, 51, 51, 0.9);
+        backdrop-filter: blur(10px);
+        color: var(--white);
+        text-align: center;
+        padding: 2rem;
+        border-top: 1px solid var(--glass-border);
+      }
+
+      footer p {
+        color: var(--white);
+        margin: 0.5rem 0;
+      }
+
+      footer a {
+        color: var(--light-green);
+        text-decoration: none;
+      }
+
+      footer a:hover {
+        color: var(--light-olive);
+      }
+
+      /* ==========================================
+           RESPONSIVE DESIGN
+        ========================================== */
+      @media (max-width: 968px) {
+        nav ul {
+          display: none;
+          flex-direction: column;
+          width: 100%;
+          margin-top: 1rem;
+        }
+
+        nav ul.active {
+          display: flex;
+        }
+
+        .menu-toggle {
+          display: block;
+        }
+
+        h1 {
+          font-size: 2rem;
+        }
+
+        h2 {
+          font-size: 1.8rem;
+        }
+
+        .home-content h1 {
+          font-size: 2.5rem;
+        }
+
+        .population-grid,
+        .contact-container {
+          grid-template-columns: 1fr;
+        }
+
+        .container {
+          padding: 2rem 1.5rem;
+        }
+
+        section {
+          padding: 80px 1rem 30px 1rem;
+        }
+      }
+
+      @media (max-width: 600px) {
+        .stats-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .home-content h1 {
+          font-size: 2rem;
+        }
+
+        nav .logo {
+          font-size: 1.2rem;
+        }
+      }
+
+      /* ==========================================
+           UTILITY CLASSES
+        ========================================== */
+      .text-center {
+        text-align: center;
+      }
+
+      .mt-2 {
+        margin-top: 2rem;
+      }
+
+      .mb-2 {
+        margin-bottom: 2rem;
+      }
+
+      /* Loading Animation */
+      .loading {
+        display: inline-block;
+        width: 20px;
+        height: 20px;
+        border: 3px solid rgba(255, 255, 255, 0.3);
+        border-radius: 50%;
+        border-top-color: var(--forest-green);
+        animation: spin 1s ease-in-out infinite;
+      }
+
+      @keyframes spin {
+        to {
+          transform: rotate(360deg);
+        }
+      }
+
+      /* Scroll to top button */
+      .scroll-top {
+        position: fixed;
+        bottom: 2rem;
+        right: 2rem;
+        background: var(--forest-green);
+        color: white;
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+        z-index: 999;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+      }
+
+      .scroll-top.visible {
+        opacity: 1;
+      }
+
+      .scroll-top:hover {
+        background: var(--charcoal-gray);
+        transform: translateY(-5px);
+      }
+    </style>
+  </head>
+  <body>
+    <!-- ==========================================
+         NAVIGATION BAR
+    ========================================== -->
+    <nav>
+      <div class="nav-container">
+        <div class="logo">🌿 Rambuka Village</div>
+        <button class="menu-toggle" onclick="toggleMenu()">☰ Menu</button>
+        <ul id="navMenu">
+          <li><a href="#home" class="nav-link active">Home</a></li>
+          <li><a href="#history" class="nav-link">History</a></li>
+          <li><a href="#population" class="nav-link">Population</a></li>
+          <li><a href="#topography" class="nav-link">Topography</a></li>
+          <li><a href="#heart" class="nav-link">Heart of Rambuka</a></li>
+          <li><a href="#landuse" class="nav-link">Land Use</a></li>
+          <li><a href="#climate" class="nav-link">Climate</a></li>
+          <li><a href="#geoportal" class="nav-link">Geo-Portal</a></li>
+          <li><a href="#contact" class="nav-link">Contact</a></li>
+        </ul>
+      </div>
+    </nav>
+
+    <!-- ==========================================
+         HOME SECTION
+    ========================================== -->
+    <section id="home">
+      <div class="container">
+        <div class="home-content">
+          <h1>Welcome to Rambuka Village</h1>
+          <p class="subtitle">🌳 A Hidden Gem Near Sinharaja Rain Forest 🌳</p>
+          <p>
+            Nestled in the lush wet zone of Sri Lanka, Rambuka Village offers a
+            peaceful retreat surrounded by green mountains, fresh air, and the
+            tranquil sounds of nature. Experience life in one of the calmest and
+            most beautiful villages in the country.
+          </p>
+          <div>
+            <a href="#geoportal" class="btn">🗺 Explore Geo-Portal</a>
+            <a href="#heart" class="btn">❤ Discover Attractions</a>
+          </div>
+
+          <div class="stats-grid">
+            <div class="stat-card">
+              <div class="icon">👥</div>
+              <h3>2,318</h3>
+              <p>Total Population</p>
+            </div>
+            <div class="stat-card">
+              <div class="icon">📏</div>
+              <h3>1159 km²</h3>
+              <p>Total Area</p>
+            </div>
+            <div class="stat-card">
+              <div class="icon">🌧</div>
+              <h3>3428 mm</h3>
+              <p>Annual Rainfall</p>
+            </div>
+            <div class="stat-card">
+              <div class="icon">🔇</div>
+              <h3>35-45 dB</h3>
+              <p>Noise Level</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================
+         HISTORY SECTION
+    ========================================== -->
+    <section id="history">
+      <div class="container">
+        <h2>📜 History of Rambuka</h2>
+        <p class="text-center">
+          Rambuka Village has a rich cultural heritage deeply rooted in Sri
+          Lankan tradition and agricultural lifestyle.
+        </p>
+
+        <div class="timeline">
+          <div class="timeline-item">
+            <h3>🏛 Ancient Origins</h3>
+            <p>
+              Rambuka's history traces back centuries, with the village
+              initially serving as a settlement for farmers and forest dwellers.
+              The proximity to the Sinharaja Rain Forest made it a strategic
+              location for traditional medicine gatherers and agricultural
+              communities.
+            </p>
+          </div>
+
+          <div class="timeline-item">
+            <h3>🌾 Agricultural Heritage</h3>
+            <p>
+              The village has long been known for its sustainable farming
+              practices. Rice cultivation, spice gardens, and tea plantations
+              have been the backbone of the local economy for generations. The
+              terraced paddy fields on the hillsides showcase the ingenuity of
+              local farmers.
+            </p>
+          </div>
+
+          <div class="timeline-item">
+            <h3>🎭 Cultural Traditions</h3>
+            <p>
+              Rambuka preserves unique cultural traditions including traditional
+              dance forms, folk music, and religious festivals. The annual
+              harvest festival brings the entire community together in
+              celebration, featuring traditional drumming, masked dancers, and
+              communal feasts.
+            </p>
+          </div>
+
+          <div class="timeline-item">
+            <h3>🏞 Conservation Efforts</h3>
+            <p>
+              In recent decades, the village has become a model for eco-tourism
+              and conservation. The community actively participates in
+              protecting the surrounding rainforest and maintaining the pristine
+              natural environment that defines Rambuka's character.
+            </p>
+          </div>
+
+          <div class="timeline-item">
+            <h3>🌟 Modern Day Rambuka</h3>
+            <p>
+              Today, Rambuka balances tradition with modernity. While
+              maintaining its cultural roots and sustainable lifestyle, the
+              village has embraced eco-tourism, attracting nature lovers and
+              researchers from around the world who seek to experience its
+              unique tranquility and biodiversity.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================
+         POPULATION SECTION
+    ========================================== -->
+    <section id="population">
+      <div class="container">
+        <h2>👥 Population Demographics</h2>
+        <p class="text-center">
+          Rambuka is home to a balanced and close-knit community living in
+          harmony with nature.
+        </p>
+
+        <div class="population-grid">
+          <div class="pop-info">
+            <h3>📊 Population Statistics</h3>
+            <div class="pop-stat">
+              <span>Total Population:</span>
+              <span>2,318 people</span>
+            </div>
+            <div class="pop-stat">
+              <span>Male Population:</span>
+              <span>1,149 (49.6%)</span>
+            </div>
+            <div class="pop-stat">
+              <span>Female Population:</span>
+              <span>1,169 (50.4%)</span>
+            </div>
+            <div class="pop-stat">
+              <span>Population Density:</span>
+              <span>2 per km²</span>
+            </div>
+            <div class="pop-stat">
+              <span>Total Area:</span>
+              <span>1,159 km²</span>
+            </div>
+
+            <h3 class="mt-2">🏘 Community Characteristics</h3>
+            <p>
+              The low population density reflects the village's spacious, rural
+              character. Families are traditionally large and
+              multi-generational, with strong community bonds and mutual support
+              systems.
+            </p>
+            <p>
+              Most residents are engaged in agriculture, eco-tourism, or
+              traditional crafts, maintaining a sustainable lifestyle that
+              respects the surrounding environment.
+            </p>
+          </div>
+
+          <div>
+            <h3 class="text-center">Gender Distribution</h3>
+            <canvas id="populationChart"></canvas>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================
+         TOPOGRAPHY SECTION
+    ========================================== -->
+    <section id="topography">
+      <div class="container">
+        <h2>⛰ Topography & Landscape</h2>
+        <p class="text-center">
+          Rambuka's terrain is characterized by rolling hills, winding roads,
+          and lush green mountains.
+        </p>
+
+        <div class="topo-features">
+          <div class="feature-card">
+            <div class="feature-icon">🏔</div>
+            <h3>Hilly Terrain</h3>
+            <p>
+              The village is situated on undulating hills with elevations
+              varying from 300 to 800 meters above sea level, providing stunning
+              panoramic views.
+            </p>
+          </div>
+
+          <div class="feature-card">
+            <div class="feature-icon">🛤</div>
+            <h3>Winding Roads</h3>
+            <p>
+              Narrow, serpentine roads wind through the village, following the
+              natural contours of the landscape and connecting scattered
+              homesteads.
+            </p>
+          </div>
+
+          <div class="feature-card">
+            <div class="feature-icon">💧</div>
+            <h3>Streams & Waterways</h3>
+            <p>
+              Multiple streams and small rivers flow through the valley,
+              providing fresh water and supporting rich biodiversity throughout
+              the year.
+            </p>
+          </div>
+
+          <div class="feature-card">
+            <div class="feature-icon">🌳</div>
+            <h3>Forest Cover</h3>
+            <p>
+              Dense forest vegetation covers much of the area, with the village
+              bordering the UNESCO World Heritage Sinharaja Rain Forest.
+            </p>
+          </div>
+        </div>
+
+        <div class="svg-map">
+          <h3 class="text-center">Landscape Profile</h3>
+          <svg viewBox="0 0 800 300" style="width: 100%; height: auto">
+            <!-- Sky -->
+            <defs>
+              <linearGradient id="skyGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+                <stop
+                  offset="0%"
+                  style="stop-color: #87ceeb; stop-opacity: 1"
+                />
+                <stop
+                  offset="100%"
+                  style="stop-color: #cde8c4; stop-opacity: 1"
+                />
+              </linearGradient>
+            </defs>
+            <rect fill="url(#skyGrad)" width="800" height="300" />
+
+            <!-- Mountains Background -->
+            <path
+              fill="#4C8C4A"
+              opacity="0.3"
+              d="M0,200 L100,150 L200,180 L300,140 L400,160 L500,130 L600,170 L700,150 L800,180 L800,300 L0,300 Z"
+            />
+
+            <!-- Mountains Foreground -->
+            <path
+              fill="#4C8C4A"
+              opacity="0.5"
+              d="M0,230 L150,180 L300,210 L450,170 L600,200 L800,220 L800,300 L0,300 Z"
+            />
+
+            <!-- Hills -->
+            <path
+              fill="#A9CBA6"
+              d="M0,250 L200,220 L400,240 L600,230 L800,260 L800,300 L0,300 Z"
+            />
+
+            <!-- Road -->
+            <path
+              fill="none"
+              stroke="#666"
+              stroke-width="3"
+              d="M0,260 Q200,240 400,255 T800,270"
+            />
+
+            <!-- Trees -->
+            <circle fill="#4C8C4A" cx="100" cy="235" r="15" />
+            <circle fill="#4C8C4A" cx="350" cy="250" r="12" />
+            <circle fill="#4C8C4A" cx="550" cy="245" r="14" />
+
+            <!-- Labels -->
+            <text
+              x="400"
+              y="50"
+              font-family="Poppins"
+              font-size="20"
+              fill="#333"
+              text-anchor="middle"
+              font-weight="bold"
+            >
+              Rambuka Village Terrain
+            </text>
+            <text
+              x="100"
+              y="130"
+              font-family="Poppins"
+              font-size="12"
+              fill="#333"
+            >
+              Sinharaja Border
+            </text>
+            <text
+              x="650"
+              y="210"
+              font-family="Poppins"
+              font-size="12"
+              fill="#333"
+            >
+              Green Mountains
+            </text>
+          </svg>
+        </div>
+
+        <div class="mt-2">
+          <h3>🗺 Geographic Features</h3>
+          <p>
+            The topography of Rambuka is dominated by its proximity to the
+            Sinharaja Rain Forest, creating a unique microclimate with high
+            rainfall and constant mist. The hilly terrain has resulted in
+            natural terracing, which locals have utilized for centuries for
+            paddy cultivation.
+          </p>
+          <p>
+            Fresh mountain air, the sound of flowing streams, and the constant
+            greenery make Rambuka an ideal destination for those seeking respite
+            from urban environments. The landscape supports a rich variety of
+            flora and fauna, including many endemic species.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================
+         HEART OF RAMBUKA SECTION
+    ========================================== -->
+    <section id="heart">
+      <div class="container">
+        <h2>❤ Heart of Rambuka</h2>
+        <p class="text-center">
+          Discover the soul of our village through its natural wonders and
+          peaceful atmosphere.
+        </p>
+
+        <div class="attractions-grid">
+          <div class="attraction-card">
+            <div class="attraction-image">🗿</div>
+            <div class="attraction-content">
+              <h3>Stone Columns</h3>
+              <p>
+                Ancient stone formations that rise majestically from the earth,
+                believed to be naturally formed geological wonders. These
+                columns have become a symbol of Rambuka's natural heritage and
+                attract geologists and tourists alike.
+              </p>
+            </div>
+          </div>
+
+          <div class="attraction-card">
+            <div class="attraction-image">🌿</div>
+            <div class="attraction-content">
+              <h3>Natural Beauty</h3>
+              <p>
+                Surrounded by pristine rainforest, Rambuka offers breathtaking
+                views of untouched nature. The village is a paradise for
+                birdwatchers, nature photographers, and anyone seeking to
+                reconnect with the natural world.
+              </p>
+            </div>
+          </div>
+
+          <div class="attraction-card">
+            <div class="attraction-image">🔇</div>
+            <div class="attraction-content">
+              <h3>Tranquil Atmosphere</h3>
+              <p>
+                With noise levels between 35-45 dB, Rambuka is one of the
+                quietest inhabited places in Sri Lanka. The absence of urban
+                noise pollution makes it perfect for meditation, yoga retreats,
+                and peaceful contemplation.
+              </p>
+            </div>
+          </div>
+
+          <div class="attraction-card">
+            <div class="attraction-image">🌲</div>
+            <div class="attraction-content">
+              <h3>Sinharaja Gateway</h3>
+              <p>
+                Rambuka serves as a gateway to the UNESCO World Heritage
+                Sinharaja Rain Forest. Many eco-tourists use the village as a
+                base for exploring this biodiversity hotspot, home to numerous
+                endemic species.
+              </p>
+            </div>
+          </div>
+
+          <div class="attraction-card">
+            <div class="attraction-image">🏡</div>
+            <div class="attraction-content">
+              <h3>Traditional Lifestyle</h3>
+              <p>
+                Experience authentic village life where traditions are preserved
+                and modernization is balanced with cultural values. Visitors can
+                participate in traditional activities like rice farming, spice
+                garden tours, and local crafts.
+              </p>
+            </div>
+          </div>
+
+          <div class="attraction-card">
+            <div class="attraction-image">💚</div>
+            <div class="attraction-content">
+              <h3>Fresh Mountain Air</h3>
+              <p>
+                The constant flow of fresh, oxygen-rich air from the surrounding
+                forests creates a naturally therapeutic environment. Many
+                visitors report improved well-being and relaxation during their
+                stay in Rambuka.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================
+         LAND USE SECTION
+    ========================================== -->
+    <section id="landuse">
+      <div class="container">
+        <h2>🌾 Land Use Distribution</h2>
+        <p class="text-center">
+          Rambuka's land is primarily dedicated to conservation, agriculture,
+          and sustainable living.
+        </p>
+
+        <div class="land-use-grid">
+          <div class="land-use-item">
+            <div style="font-size: 3rem">🌳</div>
+            <h3>Forest & Conservation</h3>
+            <div class="land-percentage">65%</div>
+            <p>Protected forest areas and natural reserves</p>
+          </div>
+
+          <div class="land-use-item">
+            <div style="font-size: 3rem">🌾</div>
+            <h3>Agriculture</h3>
+            <div class="land-percentage">25%</div>
+            <p>Paddy fields, tea plantations, and spice gardens</p>
+          </div>
+
+          <div class="land-use-item">
+            <div style="font-size: 3rem">🏘</div>
+            <h3>Residential</h3>
+            <div class="land-percentage">7%</div>
+            <p>Housing and community facilities</p>
+          </div>
+
+          <div class="land-use-item">
+            <div style="font-size: 3rem">🛤</div>
+            <h3>Infrastructure</h3>
+            <div class="land-percentage">3%</div>
+            <p>Roads, paths, and public spaces</p>
+          </div>
+        </div>
+
+        <div class="mt-2">
+          <h3>🌱 Sustainable Land Management</h3>
+          <p>
+            Rambuka follows traditional and sustainable land management
+            practices that have been refined over generations. The majority of
+            the land is kept as forest to preserve biodiversity and protect
+            water sources.
+          </p>
+          <p>
+            Agricultural activities are conducted using organic methods,
+            avoiding harmful pesticides and chemicals. Rice cultivation on
+            terraced hillsides, interspersed with spice gardens and fruit trees,
+            creates a diverse and resilient agricultural landscape.
+          </p>
+          <p>
+            Residential areas are intentionally kept small and scattered to
+            minimize environmental impact. Traditional homes built with natural
+            materials blend harmoniously with the surroundings, and the
+            community actively works to prevent deforestation and soil erosion.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================
+         CLIMATE SECTION
+    ========================================== -->
+    <section id="climate">
+      <div class="container">
+        <h2>🌦 Climate & Environment</h2>
+        <p class="text-center">
+          Rambuka experiences a tropical wet climate with abundant rainfall and
+          pleasant temperatures year-round.
+        </p>
+
+        <div class="climate-info">
+          <div class="climate-card">
+            <div class="weather-icon">🌧</div>
+            <h3>Annual Rainfall</h3>
+            <div class="climate-value">3,428 mm</div>
+            <p>
+              Consistent throughout the year, with peaks during monsoon seasons
+            </p>
+          </div>
+
+          <div class="climate-card">
+            <div class="weather-icon">🌡</div>
+            <h3>Temperature Range</h3>
+            <div class="climate-value">20-28°C</div>
+            <p>Pleasant and mild due to elevation and forest cover</p>
+          </div>
+
+          <div class="climate-card">
+            <div class="weather-icon">🔇</div>
+            <h3>Noise Level</h3>
+            <div class="climate-value">35-45 dB</div>
+            <p>Exceptionally quiet - only natural sounds</p>
+          </div>
+
+          <div class="climate-card">
+            <div class="weather-icon">💨</div>
+            <h3>Air Quality</h3>
+            <div class="climate-value">Excellent</div>
+            <p>Fresh mountain air with high oxygen content</p>
+          </div>
+        </div>
+
+        <div class="mt-2">
+          <h3>🌍 Microclimate Features</h3>
+          <p>
+            Rambuka's location in the wet zone near the Sinharaja Rain Forest
+            creates a unique microclimate characterized by high humidity,
+            frequent rainfall, and stable temperatures. The village often
+            experiences morning mist and afternoon showers, which keep the
+            vegetation lush year-round.
+          </p>
+          <p>
+            The sound environment is dominated by natural sounds: bird calls,
+            insect songs, flowing water, rustling leaves, and occasional distant
+            thunder. This makes Rambuka one of the most peaceful places in Sri
+            Lanka, ideal for sound therapy and nature meditation.
+          </p>
+          <p>
+            The abundant rainfall supports the rainforest ecosystem and ensures
+            reliable water sources for both the village and surrounding areas.
+            Water conservation is part of the local culture, with traditional
+            rainwater harvesting systems integrated into village architecture.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================
+         GEO-PORTAL SECTION
+    ========================================== -->
+    <section id="geoportal">
+      <div class="container">
+        <h2>🗺 Geo-Portal</h2>
+        <p class="text-center">
+          Explore Rambuka's geospatial data, landmarks, and natural features on
+          our interactive map.
+        </p>
+
+        <div id="map"></div>
+
+        <div class="map-controls">
+          <button class="btn" onclick="downloadGeoJSON()">
+            📥 Download GeoJSON
+          </button>
+          <button class="btn" onclick="downloadCSV()">📊 Download CSV</button>
+          <button class="btn" onclick="resetMap()">🔄 Reset Map</button>
+        </div>
+
+        <div class="coordinates-display">
+          <h3>📍 Village Coordinates</h3>
+          <pre id="coordinatesData">
+{
+  "type": "Feature",
+  "properties": {
+    "name": "Rambuka Village",
+    "location": "Wet Zone, Sri Lanka",
+    "area_km2": 1159,
+    "population": 2318
+  },
+  "geometry": {
+    "type": "Point",
+    "coordinates": [80.5000, 6.4000]
+  }
+}
+                </pre
+          >
+        </div>
+
+        <div class="mt-2">
+          <h3>🧭 Geographic Information</h3>
+          <p>
+            The Geo-Portal provides access to geospatial data for Rambuka
+            Village. You can view the village boundary, major landmarks
+            including the Stone Columns, forest boundaries, and water sources.
+            The map is interactive - click on markers to see detailed
+            information.
+          </p>
+          <p>
+            Data can be exported in GeoJSON format for use in GIS applications
+            like QGIS or ArcGIS, or as CSV for analysis in spreadsheet
+            applications. This open data approach supports research, planning,
+            and conservation efforts.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================
+         CONTACT / ABOUT SECTION
+    ========================================== -->
+    <section id="contact">
+      <div class="container">
+        <h2>📞 Contact & About</h2>
+
+        <div class="contact-container">
+          <div class="contact-info">
+            <h3>🎓 About This Project</h3>
+            <p>
+              This website was created as part of a Town and Country Planning
+              project at the
+              <strong>University of Moratuwa, Sri Lanka</strong>.
+            </p>
+            <p>
+              The goal is to showcase Rambuka Village's unique characteristics,
+              promote sustainable tourism, and provide accessible geospatial
+              information for researchers and planners.
+            </p>
+
+            <h3 class="mt-2">🏛 Institution</h3>
+            <p>
+              <strong>University of Moratuwa</strong><br />
+              Department of Town & Country Planning<br />
+              Moratuwa, Sri Lanka
+            </p>
+
+            <h3 class="mt-2">🌐 Village Information</h3>
+            <p>
+              <strong>Location:</strong> Near Sinharaja Rain Forest<br />
+              <strong>Province:</strong> Sabaragamuwa / Southern Province<br />
+              <strong>Climate Zone:</strong> Wet Zone<br />
+              <strong>Coordinates:</strong> 6.4000°N, 80.5000°E
+            </p>
+          </div>
+
+          <div class="contact-form">
+            <h3>✉ Send Us a Message</h3>
+            <form id="contactForm" onsubmit="handleFormSubmit(event)">
+              <div class="form-group">
+                <label for="name">Your Name</label>
+                <input
+                  type="text"
+                  id="name"
+                  name="name"
+                  required
+                  placeholder="Enter your name"
+                />
+              </div>
+
+              <div class="form-group">
+                <label for="email">Email Address</label>
+                <input
+                  type="email"
+                  id="email"
+                  name="email"
+                  required
+                  placeholder="Enter your email"
+                />
+              </div>
+
+              <div class="form-group">
+                <label for="message">Message</label>
+                <textarea
+                  id="message"
+                  name="message"
+                  rows="5"
+                  required
+                  placeholder="Write your message here..."
+                ></textarea>
+              </div>
+
+              <button type="submit" class="btn">📨 Send Message</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================
+         FOOTER
+    ========================================== -->
+    <footer>
+      <p>
+        &copy; 2025 Rambuka Village Website | Created for University of Moratuwa
+      </p>
+      <p>Town and Country Planning Project</p>
+      <p>
+        <a href="#home">Back to Top ↑</a>
+      </p>
+    </footer>
+
+    <!-- Scroll to Top Button -->
+    <div class="scroll-top" id="scrollTop" onclick="scrollToTop()">↑</div>
+
+    <!-- ==========================================
+         JAVASCRIPT
+    ========================================== -->
+    <script>
+              // ==========================================
+              // NAVIGATION - Active Link & Mobile Menu
+              // ==========================================
+
+              // Mobile menu toggle
+              function toggleMenu() {
+                  const navMenu = document.getElementById('navMenu');
+                  navMenu.classList.toggle('active');
+              }
+
+              // Active navigation link on scroll
+              const sections = document.querySelectorAll('section');
+              const navLinks = document.querySelectorAll('.nav-link');
+
+              window.addEventListener('scroll', () => {
+                  let current = '';
+                  sections.forEach(section => {
+                      const sectionTop = section.offsetTop;
+                      const sectionHeight = section.clientHeight;
+                      if (pageYOffset >= sectionTop - 200) {
+                          current = section.getAttribute('id');
+                      }
+                  });
+
+                  navLinks.forEach(link => {
+                      link.classList.remove('active');
+                      if (link.getAttribute('href').substring(1) === current) {
+                          link.classList.add('active');
+                      }
+                  });
+
+                  // Show/hide scroll to top button
+                  const scrollTop = document.getElementById('scrollTop');
+                  if (window.pageYOffset > 300) {
+                      scrollTop.classList.add('visible');
+                  } else {
+                      scrollTop.classList.remove('visible');
+                  }
+              });
+
+              // Smooth scroll for navigation links
+              navLinks.forEach(link => {
+                  link.addEventListener('click', (e) => {
+                      // Close mobile menu after click
+                      const navMenu = document.getElementById('navMenu');
+                      if (window.innerWidth <= 968) {
+                          navMenu.classList.remove('active');
+                      }
+                  });
+              });
+
+              // Scroll to top function
+              function scrollToTop() {
+                  window.scrollTo({
+                      top: 0,
+                      behavior: 'smooth'
+                  });
+              }
+
+              // ==========================================
+              // POPULATION CHART - Chart.js
+              // ==========================================
+
+              window.addEventListener('load', () => {
+                  const ctx = document.getElementById('populationChart').getContext('2d');
+
+                  new Chart(ctx, {
+                      type: 'doughnut',
+                      data: {
+                          labels: ['Male (1,149)', 'Female (1,169)'],
+                          datasets: [{
+                              data: [1149, 1169],
+                              backgroundColor: [
+                                  'rgba(76, 140, 74, 0.8)',
+                                  'rgba(169, 203, 166, 0.8)'
+                              ],
+                              borderColor: [
+                                  'rgba(76, 140, 74, 1)',
+                                  'rgba(169, 203, 166, 1)'
+                              ],
+                              borderWidth: 2
+                          }]
+                      },
+                      options: {
+                          responsive: true,
+                          maintainAspectRatio: true,
+                          plugins: {
+                              legend: {
+                                  position: 'bottom',
+                                  labels: {
+                                      font: {
+                                          family: 'Poppins',
+                                          size: 14
+                                      },
+                                      padding: 20
+                                  }
+                              },
+                              title: {
+                                  display: true,
+                                  text: 'Total Population: 2,318',
+                                  font: {
+                                      family: 'Poppins',
+                                      size: 16,
+                                      weight: 'bold'
+                                  }
+                              }
+                          }
+                      }
+                  });
+              });
+
+              // ==========================================
+              // GEO-PORTAL MAP - Leaflet.js
+              // ==========================================
+
+              let map;
+              let markers = [];
+
+              // Initialize map after page load
+              window.addEventListener('load', () => {
+                  // Center coordinates for Rambuka Village (approximate location near Sinharaja)
+                  const centerLat = 6.4000;
+                  const centerLng = 80.5000;
+
+                  // Initialize map
+                  map = L.map('map').setView([centerLat, centerLng], 13);
+
+                  // Add OpenStreetMap tiles
+                  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+                      maxZoom: 18
+                  }).addTo(map);
+
+                  // Village center marker
+                  const villageMarker = L.marker([centerLat, centerLng])
+                      .addTo(map)
+                      .bindPopup('<b>🏘 Rambuka Village Center</b><br>Population: 2,318<br>Area: 1,159 km²')
+                      .openPopup();
+                  markers.push(villageMarker);
+
+                  // Stone Columns attraction
+                  const stoneColumnsMarker = L.marker([centerLat + 0.02, centerLng + 0.015])
+                      .addTo(map)
+                      .bindPopup('<b>🗿 Stone Columns</b><br>Ancient geological formation<br>Main tourist attraction');
+                  markers.push(stoneColumnsMarker);
+
+                  // Sinharaja Forest boundary (approximate)
+                  const sinharajaMarker = L.marker([centerLat - 0.03, centerLng - 0.02])
+                      .addTo(map)
+                      .bindPopup('<b>🌳 Sinharaja Rain Forest Border</b><br>UNESCO World Heritage Site<br>Rich biodiversity');
+                  markers.push(sinharajaMarker);
+
+                  // Water source
+                  const waterMarker = L.marker([centerLat + 0.01, centerLng - 0.01])
+                      .addTo(map)
+                      .bindPopup('<b>💧 Mountain Stream</b><br>Fresh water source<br>Year-round flow');
+                  markers.push(waterMarker);
+
+                  // Agricultural area
+                  const farmMarker = L.marker([centerLat - 0.015, centerLng + 0.02])
+                      .addTo(map)
+                      .bindPopup('<b>🌾 Agricultural Zone</b><br>Rice paddies and spice gardens<br>Traditional farming');
+                  markers.push(farmMarker);
+
+                  // Village boundary (approximate polygon)
+                  const villageBoundary = L.polygon([
+                      [centerLat + 0.04, centerLng - 0.03],
+                      [centerLat + 0.04, centerLng + 0.04],
+                      [centerLat - 0.05, centerLng + 0.04],
+                      [centerLat - 0.05, centerLng - 0.03]
+                  ], {
+                      color: '#4C8C4A',
+                      fillColor: '#CDE8C4',
+                      fillOpacity: 0.3,
+                      weight: 2
+                  }).addTo(map).bindPopup('<b>Rambuka Village Boundary</b><br>Approximate administrative area');
+
+                  markers.push(villageBoundary);
+              });
+
+              // Reset map view
+              function resetMap() {
+                  map.setView([6.4000, 80.5000], 13);
+              }
+
+              // Download GeoJSON data
+              function downloadGeoJSON() {
+                  const geoData = {
+                      "type": "FeatureCollection",
+                      "features": [
+                          {
+                              "type": "Feature",
+                              "properties": {
+                                  "name": "Rambuka Village Center",
+                                  "type": "settlement",
+                                  "population": 2318,
+                                  "area_km2": 1159
+                              },
+                              "geometry": {
+                                  "type": "Point",
+                                  "coordinates": [80.5000, 6.4000]
+                              }
+                          },
+                          {
+                              "type": "Feature",
+                              "properties": {
+                                  "name": "Stone Columns",
+                                  "type": "attraction"
+                              },
+                              "geometry": {
+                                  "type": "Point",
+                                  "coordinates": [80.5150, 6.4200]
+                              }
+                          },
+                          {
+                              "type": "Feature",
+                              "properties": {
+                                  "name": "Sinharaja Forest Border",
+                                  "type": "conservation"
+                              },
+                              "geometry": {
+                                  "type": "Point",
+                                  "coordinates": [80.4800, 6.3700]
+                              }
+                          },
+                          {
+                              "type": "Feature",
+                              "properties": {
+                                  "name": "Mountain Stream",
+                                  "type": "water_source"
+                              },
+                              "geometry": {
+                                  "type": "Point",
+                                  "coordinates": [80.4900, 6.4100]
+                              }
+                          },
+                          {
+                              "type": "Feature",
+                              "properties": {
+                                  "name": "Village Boundary",
+                                  "type": "administrative"
+                              },
+                              "geometry": {
+                                  "type": "Polygon",
+                                  "coordinates": [[
+                                      [80.4700, 6.4400],
+                                      [80.5400, 6.4400],
+                                      [80.5400, 6.3500],
+                                      [80.4700, 6.3500],
+                                      [80.4700, 6.4400]
+                                  ]]
+                              }
+                          }
+                      ]
+                  };
+
+                  const dataStr = JSON.stringify(geoData, null, 2);
+                  const dataBlob = new Blob([dataStr], { type: 'application/json' });
+                  const url = URL.createObjectURL(dataBlob);
+                  const link = document.createElement('a');
+                  link.href = url;
+                  link.download = 'rambuka_village.geojson';
+                  link.click();
+                  URL.revokeObjectURL(url);
+
+                  alert('✅ GeoJSON file downloaded successfully!');
+              }
+
+              // Download CSV data
+              function downloadCSV() {
+                  const csvData = `Name,Type,Latitude,Longitude,Description
+      Rambuka Village Center,Settlement,6.4000,80.5000,"Population: 2318, Area: 1159 km²"
+      Stone Columns,Attraction,6.4200,80.5150,Ancient geological formation
+      Sinharaja Forest Border,Conservation,6.3700,80.4800,UNESCO World Heritage Site
+      Mountain Stream,Water Source,6.4100,80.4900,Year-round fresh water
+      Agricultural Zone,Agriculture,6.3850,80.5200,Traditional farming area`;
+
+                  const dataBlob = new Blob([csvData], { type: 'text/csv' });
+                  const url = URL.createObjectURL(dataBlob);
+                  const link = document.createElement('a');
+                  link.href = url;
+                  link.download = 'rambuka_village_data.csv';
+                  link.click();
+                  URL.revokeObjectURL(url);
+
+                  alert('✅ CSV file downloaded successfully!');
+              }
+
+              // ==========================================
+              // CONTACT FORM HANDLING
+              // ==========================================
+
+              function handleFormSubmit(event) {
+                  event.preventDefault();
+
+                  const name = document.getElementById('name').value;
+                  const email = document.getElementById('email').value;
+                  const message = document.getElementById('message').value;
+
+                  // Simulate form submission
+                  alert(✅ Thank you, ${name}!\n\nYour message has been received. We'll get back to you at ${email} soon.\n\nMessage: "${message}");
+
+                  // Reset form
+                  document.getElementById('contactForm').reset();
+
+                  return false;
+              }
+
+              // ==========================================
+              // ANIMATIONS ON SCROLL
+              // ==========================================
+
+              const observerOptions = {
+                  threshold: 0.1,
+                  rootMargin: '0px 0px -100px 0px'
+              };
+
+              const observer = new IntersectionObserver((entries) => {
+                  entries.forEach(entry => {
+                      if (entry.isIntersecting) {
+                          entry.target.style.opacity = '1';
+                          entry.target.style.transform = 'translateY(0)';
+                      }
+                  });
+              }, observerOptions);
+
+              // Observe all containers
+              document.addEventListener('DOMContentLoaded', () => {
+                  const containers = document.querySelectorAll('.container');
+                  containers.forEach(container => {
+                      container.style.opacity = '0';
+                      container.style.transform = 'translateY(30px)';
+                      container.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
+                      observer.observe(container);
+                  });
+              });
+
+              // ==========================================
+              // CONSOLE MESSAGE
+              // ==========================================
+
+              console.log(`
+              🌿 Welcome to Rambuka Village Website
+              =====================================
+              Created for: University of Moratuwa
+              Department: Town & Country Planning
+
+              This website showcases the natural beauty and
+              geospatial information of Rambuka Village.
+
+              Enjoy exploring! 🗺
+              `);
+    </script>
+  </body>
+</html>

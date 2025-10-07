@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rambuka Village - Gateway to Sinharaja Rain Forest</title>
+    <meta name="description" content="Discover Rambuka Village, a hidden gem near UNESCO World Heritage Sinharaja Rain Forest. Experience Sri Lankan village life, rich biodiversity, and natural beauty.">
+    <meta name="keywords" content="Rambuka Village, Sinharaja Rain Forest, Sri Lanka, biodiversity, eco-tourism, village life">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌿</text></svg>">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="assets/css/styles.css">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="Rambuka Village - Gateway to Sinharaja Rain Forest">
+    <meta property="og:description" content="Discover a hidden gem in Sri Lanka's wet zone, surrounded by lush greenery and natural beauty.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://rambukavillage.github.io">
+    
+    <!-- Schema.org structured data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Place",
+        "name": "Rambuka Village",
+        "description": "A beautiful village near Sinharaja Rain Forest",
+        "geo": {
+            "@type": "GeoCoordinates",
+            "latitude": 6.4000,
+            "longitude": 80.5000
+        },
+        "address": {
+            "@type": "PostalAddress",
+            "addressCountry": "LK",
+            "addressRegion": "Southern Province"
+        }
+    }
+    </script>
+</head>
+
+<body style="position: relative; min-height: 100vh;">
+    <div style="position: fixed; inset: 0; z-index: 0; pointer-events: none;">
+        <img src="Photos/Cover Page.png" alt="Background" style="width:100vw; height:100vh; object-fit:cover; filter: blur(16px) brightness(0.7); opacity:0.6;">
+    </div>
+    
+    <div id="main-content" style="position: relative; z-index: 1; background: rgba(255,255,255,0.25); border-radius: 1rem; box-shadow: 0 4px 24px rgba(76,140,74,0.08); backdrop-filter: blur(4px); margin: 2rem auto; max-width: 1100px; padding: 2rem;">
+        <!-- Navigation -->
+        <nav class="navbar">
+            <div class="nav-container">
+                <a href="index.html" class="nav-logo">
+                    🌿 Rambuka Village
+                </a>
+                
+                <button class="mobile-menu-toggle" aria-label="Toggle navigation menu" aria-expanded="false">
+                    ☰ Menu
+                </button>
+                
+                <ul class="nav-menu" id="navMenu">
+                    <li><a href="index.html" class="nav-link active">Home</a></li>
+                    <li><a href="history.html" class="nav-link">History</a></li>
+                    <li><a href="population.html" class="nav-link">Population</a></li>
+                    <li><a href="geography.html" class="nav-link">Geography</a></li>
+                    <li><a href="environment.html" class="nav-link">Environment</a></li>
+                    <li><a href="geoportal.html" class="nav-link">Geo-Portal</a></li>
+                    <li><a href="contact.html" class="nav-link">Contact</a></li>
+                </ul>
+                <button id="darkModeToggle" aria-label="Toggle dark mode" style="margin-left:1rem; font-size:1.3rem; background:var(--glass-bg); border:none; border-radius:50%; padding:0.5rem 0.7rem; cursor:pointer; color:var(--forest-green); transition:background 0.3s;">🌙</button>
+            </div>
+        </nav>
+
+        <!-- Hero Section -->
+        <section class="hero" style="background: url('Photos/IMG_2675.JPG') center center/cover no-repeat; min-height: 60vh; position: relative;">
+            <div class="hero-content animate-fade-in" style="background: rgba(255,255,255,0.7); border-radius: 1rem; padding: 2rem; box-shadow: 0 4px 24px rgba(76,140,74,0.08);">
+                <h1 class="hero-title">Welcome to Rambuka Village</h1>
+                <p class="hero-subtitle">🌳 A Hidden Gem Near Sinharaja Rain Forest 🌳</p>
+                <p class="hero-description">
+                    Nestled in the lush wet zone of Sri Lanka, Rambuka Village offers a peaceful retreat 
+                    surrounded by green mountains, fresh air, and the tranquil sounds of nature. 
+                    Experience life in one of the calmest and most beautiful villages in the country.
+                </p>
+                
+                <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; margin-top: 2rem;">
+                    <a href="geoportal.html" class="btn btn-primary">🗺️ Explore Geo-Portal</a>
+                    <a href="environment.html" class="btn btn-glass">❤️ Discover Attractions</a>
+                    <a href="contact.html" class="btn btn-outline">📞 Get in Touch</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Village Overview Stats -->
+        <section class="page-section" style="min-height: auto; padding: 4rem 0;">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">Village at a Glance</h2>
+                    <p class="section-description">
+                        Quick facts about our beautiful village and its natural environment
+                    </p>
+                </div>
+                
+                <div class="grid grid-auto-fit" style="margin-top: 3rem;">
+                    <div class="card animate-fade-in">
+                        <div class="card-header">
+                            <span class="card-icon">👥</span>
+                            <h3 class="card-title">2,318</h3>
+                        </div>
+                        <p class="card-text">Total Population</p>
+                        <p style="font-size: 0.9rem; color: var(--forest-green); margin: 0;">
+                            Male: 1,149 | Female: 1,169
+                        </p>
+                    </div>
+                    
+                    <div class="card animate-fade-in">
+                        <div class="card-header">
+                            <span class="card-icon">📏</span>
+                            <h3 class="card-title">1,159 km²</h3>
+                        </div>
+                        <p class="card-text">Total Area</p>
+                        <p style="font-size: 0.9rem; color: var(--forest-green); margin: 0;">
+                            Diverse topography with hills and valleys
+                        </p>
+                    </div>
+                    
+                    <div class="card animate-fade-in">
+                        <div class="card-header">
+                            <span class="card-icon">🌧️</span>
+                            <h3 class="card-title">3,428 mm</h3>
+                        </div>
+                        <p class="card-text">Annual Rainfall</p>
+                        <p style="font-size: 0.9rem; color: var(--forest-green); margin: 0;">
+                            Wet zone climate with high humidity
+                        </p>
+                    </div>
+                    
+                    <div class="card animate-fade-in">
+                        <div class="card-header">
+                            <span class="card-icon">🔇</span>
+                            <h3 class="card-title">35-45 dB</h3>
+                        </div>
+                        <p class="card-text">Noise Level</p>
+                        <p style="font-size: 0.9rem; color: var(--forest-green); margin: 0;">
+                            Exceptionally peaceful environment
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Key Features Section -->
+        <section class="page-section" style="background: rgba(255, 255, 255, 0.1);">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">Why Visit Rambuka?</h2>
+                    <p class="section-description">
+                        Discover what makes our village special and worth exploring
+                    </p>
+                </div>
+                
+                <div class="grid grid-3" style="margin-top: 3rem;">
+                    <div class="card animate-fade-in" style="text-align: center;">
+                        <span style="font-size: 4rem; display: block; margin-bottom: 1rem;">🌳</span>
+                        <h3 style="color: var(--forest-green); margin-bottom: 1rem;">Biodiversity Hotspot</h3>
+                        <p>Adjacent to UNESCO World Heritage Sinharaja Rain Forest, home to endemic species and rich ecosystems</p>
+                        <a href="environment.html" class="btn btn-outline" style="margin-top: 1rem;">Learn More</a>
+                    </div>
+                    
+                    <div class="card animate-fade-in" style="text-align: center;">
+                        <span style="font-size: 4rem; display: block; margin-bottom: 1rem;">🏔️</span>
+                        <h3 style="color: var(--forest-green); margin-bottom: 1rem;">Stunning Geography</h3>
+                        <p>Diverse topography with rolling hills, valleys, and unique geological formations like ancient stone columns</p>
+                        <a href="geography.html" class="btn btn-outline" style="margin-top: 1rem;">Explore</a>
+                    </div>
+                    
+                    <div class="card animate-fade-in" style="text-align: center;">
+                        <span style="font-size: 4rem; display: block; margin-bottom: 1rem;">🌾</span>
+                        <h3 style="color: var(--forest-green); margin-bottom: 1rem;">Authentic Culture</h3>
+                        <p>Traditional Sri Lankan village life with sustainable agriculture, spice gardens, and warm hospitality</p>
+                        <a href="history.html" class="btn btn-outline" style="margin-top: 1rem;">Discover</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Interactive Preview Section -->
+        <section class="page-section">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">Explore Rambuka</h2>
+                    <p class="section-description">
+                        Get a quick preview of what you can discover about our village
+                    </p>
+                </div>
+                
+                <div class="grid grid-2" style="margin-top: 3rem; gap: 3rem;">
+                    <div class="glass-container animate-fade-in">
+                        <h3 style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 1.5rem;">
+                            <span>📊</span> Population Insights
+                        </h3>
+                        <p style="margin-bottom: 2rem;">
+                            Learn about our community demographics, household composition, and social structure that makes Rambuka unique.
+                        </p>
+                        
+                        <div style="background: rgba(255, 255, 255, 0.4); border-radius: 15px; padding: 1.5rem; margin-bottom: 2rem;">
+                            <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem;">
+                                <div style="text-align: center;">
+                                    <div style="font-size: 2rem; font-weight: 700; color: var(--forest-green);">1,149</div>
+                                    <div style="font-size: 0.9rem;">Male Population</div>
+                                </div>
+                                <div style="text-align: center;">
+                                    <div style="font-size: 2rem; font-weight: 700; color: var(--forest-green);">1,169</div>
+                                    <div style="font-size: 0.9rem;">Female Population</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <a href="population.html" class="btn btn-primary" style="width: 100%;">
+                            View Detailed Demographics
+                        </a>
+                    </div>
+                    
+                    <div class="glass-container animate-fade-in">
+                        <h3 style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 1.5rem;">
+                            <span>🗺️</span> Interactive Map
+                        </h3>
+                        <p style="margin-bottom: 2rem;">
+                            Explore our village through detailed maps showing landmarks, boundaries, and points of interest with downloadable GIS data.
+                        </p>
+                        
+                        <div style="background: linear-gradient(135deg, var(--forest-green), var(--light-olive)); height: 200px; border-radius: 15px; display: flex; align-items: center; justify-content: center; margin-bottom: 2rem; color: white; font-size: 3rem;">
+                            🗺️
+                        </div>
+                        
+                        <a href="geoportal.html" class="btn btn-primary" style="width: 100%;">
+                            Open Geo-Portal
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Call to Action Section -->
+        <section class="page-section" style="background: rgba(76, 140, 74, 0.1);">
+            <div class="container">
+                <div class="glass-container text-center animate-fade-in">
+                    <h2 style="font-size: 2.5rem; margin-bottom: 1rem;">Ready to Explore?</h2>
+                    <p style="font-size: 1.2rem; margin-bottom: 2rem; max-width: 600px; margin-left: auto; margin-right: auto;">
+                        Dive deeper into the rich heritage, natural beauty, and geographic wonders of Rambuka Village. 
+                        Start your journey through our comprehensive digital portal.
+                    </p>
+                    
+                    <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+                        <a href="history.html" class="btn btn-primary">📜 Village History</a>
+                        <a href="geography.html" class="btn btn-glass">🏔️ Geography & Climate</a>
+                        <a href="environment.html" class="btn btn-outline">🌿 Environment & Wildlife</a>
+                    </div>
+                    
+                    <div style="margin-top: 3rem; padding-top: 2rem; border-top: 1px solid rgba(76, 140, 74, 0.3);">
+                        <h4 style="margin-bottom: 1rem; color: var(--forest-green);">🎓 Academic Resource</h4>
+                        <p style="font-size: 0.95rem; margin: 0; opacity: 0.8;">
+                            This website was created for the University of Moratuwa's Department of Town & Country Planning 
+                            as an educational resource showcasing GIS applications and rural development studies.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="container">
+                <div class="grid grid-auto-fit" style="grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem; margin-bottom: 2rem;">
+                    <div class="footer-section">
+                        <h4 style="color: var(--light-green); margin-bottom: 1rem;">🌿 Rambuka Village</h4>
+                        <p>A beautiful village nestled near the UNESCO World Heritage Sinharaja Rain Forest, showcasing rich biodiversity and traditional Sri Lankan culture.</p>
+                        <div style="display: flex; gap: 1rem; margin-top: 1rem;">
+                            <span>🌍</span>
+                            <span>🌳</span>
+                            <span>🏘️</span>
+                        </div>
+                    </div>
+                    
+                    <div class="footer-section">
+                        <h5 style="color: var(--light-green); margin-bottom: 1rem;">Quick Links</h5>
+                        <ul style="list-style: none; padding: 0; margin: 0;">
+                            <li style="margin-bottom: 0.5rem;"><a href="index.html" style="color: white; text-decoration: none;">🏠 Home</a></li>
+                            <li style="margin-bottom: 0.5rem;"><a href="history.html" style="color: white; text-decoration: none;">📜 History</a></li>
+                            <li style="margin-bottom: 0.5rem;"><a href="population.html" style="color: white; text-decoration: none;">👥 Population</a></li>
+                            <li style="margin-bottom: 0.5rem;"><a href="geography.html" style="color: white; text-decoration: none;">🏔️ Geography</a></li>
+                            <li style="margin-bottom: 0.5rem;"><a href="environment.html" style="color: white; text-decoration: none;">🌿 Environment</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="footer-section">
+                        <h5 style="color: var(--light-green); margin-bottom: 1rem;">Resources</h5>
+                        <ul style="list-style: none; padding: 0; margin: 0;">
+                            <li style="margin-bottom: 0.5rem;"><a href="geoportal.html" style="color: white; text-decoration: none;">🗺️ Geo-Portal</a></li>
+                            <li style="margin-bottom: 0.5rem;"><a href="contact.html" style="color: white; text-decoration: none;">📞 Contact</a></li>
+                            <li style="margin-bottom: 0.5rem;"><a href="#" onclick="downloadGeoJSON()" style="color: white; text-decoration: none;">📄 Download GeoJSON</a></li>
+                            <li style="margin-bottom: 0.5rem;"><a href="#" onclick="downloadCSV()" style="color: white; text-decoration: none;">📊 Download Data</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="footer-section">
+                        <h5 style="color: var(--light-green); margin-bottom: 1rem;">Contact Info</h5>
+                        <div style="font-size: 0.9rem; line-height: 1.6;">
+                            <p style="margin: 0.5rem 0;">📍 Rambuka Village<br>Near Sinharaja Rain Forest<br>Sri Lanka</p>
+                            <p style="margin: 0.5rem 0;">📧 info@rambukavillage.lk</p>
+                            <p style="margin: 0.5rem 0;">🌐 Population: 2,318</p>
+                            <p style="margin: 0.5rem 0;">📏 Area: 1,159 km²</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div style="border-top: 1px solid rgba(255,255,255,0.2); padding-top: 2rem; text-align: center;">
+                    <p style="margin: 0.5rem 0; font-size: 0.9rem;">
+                        © 2025 Rambuka Village Website. Created for 
+                        <a href="https://uom.lk" style="color: var(--light-green);">University of Moratuwa</a>
+                    </p>
+                    <p style="margin: 0.5rem 0; font-size: 0.9rem;">
+                        Department of Town & Country Planning | GIS & Remote Sensing
+                    </p>
+                    <p style="margin: 0.5rem 0; font-size: 0.8rem; opacity: 0.8;">
+                        Built with modern web technologies for educational and research purposes
+                    </p>
+                </div>
+            </div>
+        </footer>
+
+        <!-- Scroll to Top Button -->
+        <button id="scrollTop" class="scroll-to-top" aria-label="Scroll to top" onclick="scrollToTop()">
+            ↑
+        </button>
+
+        <!-- JavaScript -->
+        <script src="assets/js/main.js"></script>
+        
+        <!-- Add CSS for animations -->
+        <style>
+            @keyframes slideIn {
+                from { transform: translateX(100%); opacity: 0; }
+                to { transform: translateX(0); opacity: 1; }
+            }
+            
+            @keyframes slideOut {
+                from { transform: translateX(0); opacity: 1; }
+                to { transform: translateX(100%); opacity: 0; }
+            }
+            
+            .notification {
+                animation: slideIn 0.3s ease;
+            }
+        </style>
+    </div>
+
+    <script>
+        const darkModeToggle = document.getElementById('darkModeToggle');
+        darkModeToggle.addEventListener('click', function() {
+          document.body.classList.toggle('dark-mode');
+          if(document.body.classList.contains('dark-mode')) {
+            darkModeToggle.textContent = '☀️';
+            localStorage.setItem('theme', 'dark');
+          } else {
+            darkModeToggle.textContent = '🌙';
+            localStorage.setItem('theme', 'light');
+          }
+        });
+        if(localStorage.getItem('theme') === 'dark') {
+          document.body.classList.add('dark-mode');
+          darkModeToggle.textContent = '☀️';
+        }
+    </script>
+
+    <style>
+    body.dark-mode {
+      background: linear-gradient(135deg, #222 0%, #333 50%, #222 100%) !important;
+      color: #e0e0e0 !important;
+    }
+    body.dark-mode .container,
+    body.dark-mode #main-content {
+      background: rgba(30,30,30,0.7) !important;
+      color: #e0e0e0 !important;
+    }
+    body.dark-mode .navbar,
+    body.dark-mode .footer {
+      background: rgba(20,20,20,0.8) !important;
+      color: #e0e0e0 !important;
+    }
+    body.dark-mode .card,
+    body.dark-mode .glass-container,
+    body.dark-mode .page-section,
+    body.dark-mode .section-header {
+      background: rgba(40,40,40,0.6) !important;
+      color: #e0e0e0 !important;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.2) !important;
+    }
+    body.dark-mode a,
+    body.dark-mode .nav-link {
+      color: #90ee90 !important;
+    }
+    body.dark-mode .btn {
+      background: #333 !important;
+      color: #90ee90 !important;
+      border-color: #90ee90 !important;
+    }
+    body.dark-mode .btn-primary {
+      background: #4c8c4a !important;
+      color: #fff !important;
+    }
+    body.dark-mode .btn-outline {
+      background: transparent !important;
+      color: #90ee90 !important;
+      border-color: #90ee90 !important;
+    }
+    body.dark-mode .btn-glass {
+      background: rgba(40,40,40,0.4) !important;
+      color: #90ee90 !important;
+    }
+    </style>
+</body>
+</html>

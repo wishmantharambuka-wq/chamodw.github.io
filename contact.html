@@ -1,0 +1,971 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Contact Us - Rambuka Village</title>
+    <meta
+      name="description"
+      content="Contact Rambuka Village - Send us a message, learn about our University of Moratuwa research project, and get in touch for tourism and research inquiries."
+    />
+    <meta
+      name="keywords"
+      content="Rambuka contact, University of Moratuwa, village tourism, research project, contact form, Sri Lanka"
+    />
+
+    <!-- Favicon -->
+    <link
+      rel="icon"
+      type="image/svg+xml"
+      href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📞</text></svg>"
+    />
+
+    <!-- Google Fonts -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="assets/css/styles.css" />
+
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "ContactPage",
+        "name": "Contact Rambuka Village",
+        "description": "Contact information and inquiry form for Rambuka Village",
+        "mainEntity": {
+          "@type": "Place",
+          "name": "Rambuka Village",
+          "address": {
+            "@type": "PostalAddress",
+            "addressCountry": "LK",
+            "addressRegion": "Sabaragamuwa Province"
+          }
+        }
+      }
+    </script>
+  </head>
+  <body>
+    <!-- Navigation -->
+    <nav class="navbar">
+      <div class="nav-container">
+        <a href="index.html" class="nav-logo"> 🌿 Rambuka Village </a>
+        <button class="mobile-menu-toggle" aria-label="Toggle navigation menu" aria-expanded="false">☰ Menu</button>
+        <ul class="nav-menu" id="navMenu">
+          <li><a href="index.html" class="nav-link">Home</a></li>
+          <li><a href="history.html" class="nav-link">History</a></li>
+          <li><a href="population.html" class="nav-link">Population</a></li>
+          <li><a href="geography.html" class="nav-link">Geography</a></li>
+          <li><a href="environment.html" class="nav-link">Environment</a></li>
+          <li><a href="geoportal.html" class="nav-link">Geo-Portal</a></li>
+          <li><a href="contact.html" class="nav-link active">Contact</a></li>
+        </ul>
+        <button id="darkModeToggle" aria-label="Toggle dark mode" style="margin-left:1rem; font-size:1.3rem; background:var(--glass-bg); border:none; border-radius:50%; padding:0.5rem 0.7rem; cursor:pointer; color:var(--forest-green); transition:background 0.3s;">🌙</button>
+      </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="page-section">
+      <div class="container">
+        <div class="section-header">
+          <h1 class="section-title">📞 Contact Us</h1>
+          <p class="section-description">
+            Connect with Rambuka Village for tourism, research, and
+            collaboration opportunities. We'd love to hear from you and discuss
+            how we can work together.
+          </p>
+        </div>
+
+        <div class="glass-container animate-fade-in-up">
+          <div class="grid grid-3" style="text-align: center">
+            <div>
+              <div style="font-size: 3rem; margin-bottom: 1rem">📧</div>
+              <h3 style="color: var(--forest-green); margin-bottom: 0.5rem">
+                24/7 Available
+              </h3>
+              <p style="margin: 0">Always ready to connect</p>
+            </div>
+            <div>
+              <div style="font-size: 3rem; margin-bottom: 1rem">🎓</div>
+              <h3 style="color: var(--forest-green); margin-bottom: 0.5rem">
+                Research Project
+              </h3>
+              <p style="margin: 0">University of Moratuwa</p>
+            </div>
+            <div>
+              <div style="font-size: 3rem; margin-bottom: 1rem">🤝</div>
+              <h3 style="color: var(--forest-green); margin-bottom: 0.5rem">
+                Partnerships
+              </h3>
+              <p style="margin: 0">Collaboration welcome</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact Form Section -->
+    <section class="page-section" style="background: rgba(255, 255, 255, 0.05)">
+      <div class="container">
+        <div class="section-header">
+          <h2 class="section-title">✉️ Send Us a Message</h2>
+          <p class="section-description">
+            We'd love to hear from you. Send us a message and we'll respond as
+            soon as possible.
+          </p>
+        </div>
+
+        <div class="glass-container animate-fade-in-up">
+          <div class="grid grid-2" style="gap: 3rem; align-items: start">
+            <div>
+              <h3 style="margin-bottom: 1.5rem">📝 Contact Form</h3>
+              <p style="margin-bottom: 2rem">
+                Fill out the form below and we'll get back to you shortly.
+              </p>
+
+              <form id="contactForm" class="modern-form">
+                <div class="form-group">
+                  <label for="name">
+                    <span class="label-icon">👤</span>
+                    Your Name
+                  </label>
+                  <input
+                    type="text"
+                    id="name"
+                    name="name"
+                    required
+                    placeholder="Enter your full name"
+                    class="form-input"
+                  />
+                  <div class="input-feedback" id="nameError"></div>
+                </div>
+
+                <div class="form-group">
+                  <label for="email">
+                    <span class="label-icon">📧</span>
+                    Email Address
+                  </label>
+                  <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    required
+                    placeholder="Enter your email address"
+                    class="form-input"
+                  />
+                  <div class="input-feedback" id="emailError"></div>
+                </div>
+
+                <div class="form-group">
+                  <label for="phone">
+                    <span class="label-icon">📱</span>
+                    Phone Number
+                  </label>
+                  <input
+                    type="tel"
+                    id="phone"
+                    name="phone"
+                    placeholder="Enter your phone number (optional)"
+                    class="form-input"
+                  />
+                </div>
+
+                <div class="form-group">
+                  <label for="subject">
+                    <span class="label-icon">💭</span>
+                    Subject
+                  </label>
+                  <select
+                    id="subject"
+                    name="subject"
+                    required
+                    class="form-select"
+                  >
+                    <option value="">Select a subject</option>
+                    <option value="tourism">Tourism Inquiry</option>
+                    <option value="research">Research Collaboration</option>
+                    <option value="academic">Academic Project</option>
+                    <option value="media">Media & Press</option>
+                    <option value="partnership">Partnership Opportunity</option>
+                    <option value="general">General Question</option>
+                    <option value="other">Other</option>
+                  </select>
+                  <div class="input-feedback" id="subjectError"></div>
+                </div>
+
+                <div class="form-group">
+                  <label for="message">
+                    <span class="label-icon">💬</span>
+                    Message
+                  </label>
+                  <textarea
+                    id="message"
+                    name="message"
+                    rows="6"
+                    required
+                    placeholder="Write your message here..."
+                    class="form-textarea"
+                  ></textarea>
+                  <div class="input-feedback" id="messageError"></div>
+                  <div class="character-count">
+                    <span id="charCount">0</span>/500 characters
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label class="checkbox-label">
+                    <input type="checkbox" id="newsletter" name="newsletter" />
+                    <span class="checkmark"></span>
+                    Subscribe to updates about Rambuka Village
+                  </label>
+                </div>
+
+                <button type="submit" class="btn btn-primary btn-large">
+                  <span class="btn-icon">📨</span>
+                  Send Message
+                </button>
+              </form>
+            </div>
+
+            <div>
+              <div
+                style="
+                  background: rgba(255, 255, 255, 0.1);
+                  padding: 2rem;
+                  border-radius: 15px;
+                  margin-bottom: 2rem;
+                "
+              >
+                <div style="font-size: 2rem; margin-bottom: 1rem">📍</div>
+                <h4 style="color: var(--forest-green); margin-bottom: 1rem">
+                  Location
+                </h4>
+                <p>
+                  Rambuka Village<br />
+                  Near Sinharaja Rain Forest<br />
+                  Sabaragamuwa Province<br />
+                  Sri Lanka
+                </p>
+              </div>
+
+              <div
+                style="
+                  background: rgba(255, 255, 255, 0.1);
+                  padding: 2rem;
+                  border-radius: 15px;
+                  margin-bottom: 2rem;
+                "
+              >
+                <div style="font-size: 2rem; margin-bottom: 1rem">🌐</div>
+                <h4 style="color: var(--forest-green); margin-bottom: 1rem">
+                  Coordinates
+                </h4>
+                <p>
+                  Latitude: 6.4000°N<br />
+                  Longitude: 80.5000°E<br />
+                  Elevation: ~450m ASL<br />
+                  Time Zone: +5:30 GMT
+                </p>
+              </div>
+
+              <div
+                style="
+                  background: rgba(255, 255, 255, 0.1);
+                  padding: 2rem;
+                  border-radius: 15px;
+                "
+              >
+                <div style="font-size: 2rem; margin-bottom: 1rem">📞</div>
+                <h4 style="color: var(--forest-green); margin-bottom: 1rem">
+                  Contact Info
+                </h4>
+                <p>
+                  Phone: +94 XX XXX XXXX<br />
+                  Email: info@rambukavillage.lk<br />
+                  Tourism: tourism@rambukavillage.lk<br />
+                  Research: research@rambukavillage.lk
+                </p>
+              </div>
+
+              <div
+                style="
+                  background: rgba(255, 255, 255, 0.1);
+                  padding: 2rem;
+                  border-radius: 15px;
+                "
+              >
+                <div style="font-size: 2rem; margin-bottom: 1rem">⏰</div>
+                <h4 style="color: var(--forest-green); margin-bottom: 1rem">
+                  Response Time
+                </h4>
+                <p>
+                  Tourism Inquiries: 24 hours<br />
+                  Research Projects: 2-3 days<br />
+                  General Questions: 1-2 days<br />
+                  Emergency: Immediate
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- About Project Section -->
+    <section class="page-section">
+      <div class="container">
+        <div class="section-header">
+          <h2 class="section-title">🎓 About This Project</h2>
+          <p class="section-description">
+            Learn about the academic research behind this website
+          </p>
+        </div>
+
+        <div class="glass-container animate-fade-in-up">
+          <div class="grid grid-2" style="gap: 3rem; align-items: start">
+            <div>
+              <div
+                style="display: flex; align-items: center; margin-bottom: 2rem"
+              >
+                <div style="font-size: 3rem; margin-right: 1rem">🏛️</div>
+                <div>
+                  <h3 style="color: var(--forest-green); margin-bottom: 0.5rem">
+                    University of Moratuwa Research Project
+                  </h3>
+                  <p style="margin: 0; font-style: italic">
+                    Department of Town & Country Planning | 2024
+                  </p>
+                </div>
+              </div>
+
+              <div class="project-description">
+                <p>
+                  This website was created as part of a comprehensive Town and
+                  Country Planning research project at the
+                  <strong>University of Moratuwa, Sri Lanka</strong>. The
+                  project aims to showcase Rambuka Village's unique
+                  characteristics through modern web technologies and geographic
+                  information systems.
+                </p>
+
+                <div class="project-objectives">
+                  <h4>🎯 Project Objectives</h4>
+                  <ul>
+                    <li>
+                      Document and preserve village heritage and cultural
+                      traditions
+                    </li>
+                    <li>
+                      Promote sustainable eco-tourism and community development
+                    </li>
+                    <li>
+                      Provide accessible geospatial information for researchers
+                      and planners
+                    </li>
+                    <li>
+                      Demonstrate modern web development techniques for rural
+                      communities
+                    </li>
+                    <li>
+                      Support conservation efforts in the Sinharaja forest
+                      region
+                    </li>
+                  </ul>
+                </div>
+
+                <div class="project-methodology">
+                  <h4>🔬 Research Methodology</h4>
+                  <div class="methodology-grid">
+                    <div class="method-item">
+                      <span class="method-icon">📋</span>
+                      <span>Field Surveys</span>
+                    </div>
+                    <div class="method-item">
+                      <span class="method-icon">🗺️</span>
+                      <span>GIS Mapping</span>
+                    </div>
+                    <div class="method-item">
+                      <span class="method-icon">📊</span>
+                      <span>Data Analysis</span>
+                    </div>
+                    <div class="method-item">
+                      <span class="method-icon">🎤</span>
+                      <span>Community Interviews</span>
+                    </div>
+                    <div class="method-item">
+                      <span class="method-icon">📸</span>
+                      <span>Documentation</span>
+                    </div>
+                    <div class="method-item">
+                      <span class="method-icon">💻</span>
+                      <span>Digital Modeling</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div>
+              <div
+                style="
+                  background: rgba(255, 255, 255, 0.1);
+                  padding: 2rem;
+                  border-radius: 15px;
+                  margin-bottom: 2rem;
+                "
+              >
+                <h4 style="color: var(--forest-green); margin-bottom: 1rem">
+                  🏛️ Institution Details
+                </h4>
+                <p><strong>University:</strong> University of Moratuwa</p>
+                <p><strong>Faculty:</strong> Architecture</p>
+                <p><strong>Department:</strong> Town & Country Planning</p>
+                <p><strong>Location:</strong> Moratuwa, Sri Lanka</p>
+                <p><strong>Established:</strong> 1972</p>
+              </div>
+
+              <div
+                style="
+                  background: rgba(255, 255, 255, 0.1);
+                  padding: 2rem;
+                  border-radius: 15px;
+                  margin-bottom: 2rem;
+                "
+              >
+                <h4 style="color: var(--forest-green); margin-bottom: 1rem">
+                  📊 Project Statistics
+                </h4>
+                <div class="grid grid-2" style="gap: 1rem; text-align: center">
+                  <div>
+                    <div style="font-size: 2rem; color: var(--forest-green)">
+                      6
+                    </div>
+                    <div style="font-size: 0.9rem">Research Months</div>
+                  </div>
+                  <div>
+                    <div style="font-size: 2rem; color: var(--forest-green)">
+                      50+
+                    </div>
+                    <div style="font-size: 0.9rem">Data Points</div>
+                  </div>
+                  <div>
+                    <div style="font-size: 2rem; color: var(--forest-green)">
+                      100+
+                    </div>
+                    <div style="font-size: 0.9rem">Interviews</div>
+                  </div>
+                  <div>
+                    <div style="font-size: 2rem; color: var(--forest-green)">
+                      7
+                    </div>
+                    <div style="font-size: 0.9rem">Web Pages</div>
+                  </div>
+                </div>
+              </div>
+
+              <div
+                style="
+                  background: rgba(255, 255, 255, 0.1);
+                  padding: 2rem;
+                  border-radius: 15px;
+                "
+              >
+                <h4 style="color: var(--forest-green); margin-bottom: 1rem">
+                  🤝 Collaboration
+                </h4>
+                <p>We welcome collaboration with:</p>
+                <ul style="padding-left: 1.5rem">
+                  <li>Research institutions</li>
+                  <li>Environmental organizations</li>
+                  <li>Tourism boards</li>
+                  <li>GIS professionals</li>
+                  <li>Students and academics</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="page-section" style="background: rgba(255, 255, 255, 0.05)">
+      <div class="container">
+        <div class="section-header">
+          <h2 class="section-title">❓ Frequently Asked Questions</h2>
+          <p class="section-description">
+            Common questions about Rambuka Village and our research project
+          </p>
+        </div>
+
+        <div class="faq-container">
+          <div class="faq-item glass-effect">
+            <div class="faq-question" onclick="toggleFAQ(this)">
+              <span>How can I visit Rambuka Village?</span>
+              <span class="faq-toggle">+</span>
+            </div>
+            <div class="faq-answer">
+              <p>
+                Rambuka Village welcomes eco-tourists and researchers. Contact
+                us through the form above to arrange your visit. We recommend
+                bringing appropriate gear for rainforest conditions and
+                coordinating with local guides.
+              </p>
+            </div>
+          </div>
+
+          <div class="faq-item glass-effect">
+            <div class="faq-question" onclick="toggleFAQ(this)">
+              <span>Can I use the geographic data for my research?</span>
+              <span class="faq-toggle">+</span>
+            </div>
+            <div class="faq-answer">
+              <p>
+                Yes! Our GeoJSON and CSV data are available for academic and
+                research purposes. Please cite our project and contact us for
+                more detailed datasets or collaboration opportunities.
+              </p>
+            </div>
+          </div>
+
+          <div class="faq-item glass-effect">
+            <div class="faq-question" onclick="toggleFAQ(this)">
+              <span>What accommodations are available?</span>
+              <span class="faq-toggle">+</span>
+            </div>
+            <div class="faq-answer">
+              <p>
+                The village offers eco-friendly homestays with local families,
+                camping sites, and research facilities. All accommodations are
+                designed to minimize environmental impact while providing
+                comfortable stays.
+              </p>
+            </div>
+          </div>
+
+          <div class="faq-item glass-effect">
+            <div class="faq-question" onclick="toggleFAQ(this)">
+              <span>How accurate is the geographic data?</span>
+              <span class="faq-toggle">+</span>
+            </div>
+            <div class="faq-answer">
+              <p>
+                Our coordinates are approximate and based on field surveys and
+                GPS measurements. For precise surveying or official mapping, we
+                recommend professional verification and updating.
+              </p>
+            </div>
+          </div>
+
+          <div class="faq-item glass-effect">
+            <div class="faq-question" onclick="toggleFAQ(this)">
+              <span>Is the village involved in conservation efforts?</span>
+              <span class="faq-toggle">+</span>
+            </div>
+            <div class="faq-answer">
+              <p>
+                Absolutely! Rambuka Village is actively involved in protecting
+                the Sinharaja forest border and maintaining sustainable
+                practices. Community members participate in conservation
+                programs and eco-tourism initiatives.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="container">
+        <div class="footer-content">
+          <div class="footer-section">
+            <h3>🏞️ Rambuka Village</h3>
+            <p>
+              A pristine village nestled in the heart of Sri Lanka's rainforest
+              region, where tradition meets conservation.
+            </p>
+            <div class="social-links">
+              <a href="#" aria-label="Facebook"><span>📘</span></a>
+              <a href="#" aria-label="Twitter"><span>🐦</span></a>
+              <a href="#" aria-label="Instagram"><span>📷</span></a>
+            </div>
+          </div>
+
+          <div class="footer-section">
+            <h4>Quick Links</h4>
+            <ul>
+              <li><a href="index.html">Home</a></li>
+              <li><a href="history.html">History</a></li>
+              <li><a href="population.html">Population</a></li>
+              <li><a href="geography.html">Geography</a></li>
+            </ul>
+          </div>
+
+          <div class="footer-section">
+            <h4>Explore</h4>
+            <ul>
+              <li><a href="environment.html">Environment</a></li>
+              <li><a href="geoportal.html">Geo Portal</a></li>
+              <li><a href="contact.html">Contact</a></li>
+            </ul>
+          </div>
+
+          <div class="footer-section">
+            <h4>Contact Info</h4>
+            <p>📍 Rambuka Village, Sabaragamuwa Province, Sri Lanka</p>
+            <p>📞 +94 XX XXX XXXX</p>
+            <p>✉️ info@rambukavillage.lk</p>
+          </div>
+        </div>
+
+        <div class="footer-bottom">
+          <p>
+            &copy; 2024 Rambuka Village. All rights reserved. | University of
+            Moratuwa Research Project
+          </p>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="assets/js/main.js"></script>
+    <script>
+      // Contact page specific functionality
+      document.addEventListener("DOMContentLoaded", function () {
+        const app = new RambukaApp();
+        initializeContactForm();
+      });
+
+      // Initialize contact form functionality
+      function initializeContactForm() {
+        const form = document.getElementById("contactForm");
+        const messageTextarea = document.getElementById("message");
+        const charCount = document.getElementById("charCount");
+
+        // Character counter for message
+        messageTextarea.addEventListener("input", function () {
+          const currentLength = this.value.length;
+          charCount.textContent = currentLength;
+
+          if (currentLength > 500) {
+            charCount.style.color = "#ef4444";
+          } else if (currentLength > 400) {
+            charCount.style.color = "#f59e0b";
+          } else {
+            charCount.style.color = "#6b7280";
+          }
+        });
+
+        // Form validation and submission
+        form.addEventListener("submit", function (e) {
+          e.preventDefault();
+          handleFormSubmit();
+        });
+
+        // Real-time validation
+        const inputs = form.querySelectorAll(
+          "input[required], select[required], textarea[required]"
+        );
+        inputs.forEach((input) => {
+          input.addEventListener("blur", validateField);
+          input.addEventListener("input", clearFieldError);
+        });
+      }
+
+      // Validate individual field
+      function validateField(event) {
+        const field = event.target;
+        const fieldName = field.name;
+        const value = field.value.trim();
+
+        clearFieldError(event);
+
+        let isValid = true;
+        let errorMessage = "";
+
+        switch (fieldName) {
+          case "name":
+            if (value.length < 2) {
+              errorMessage = "Name must be at least 2 characters long";
+              isValid = false;
+            }
+            break;
+          case "email":
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(value)) {
+              errorMessage = "Please enter a valid email address";
+              isValid = false;
+            }
+            break;
+          case "subject":
+            if (value === "") {
+              errorMessage = "Please select a subject";
+              isValid = false;
+            }
+            break;
+          case "message":
+            if (value.length < 10) {
+              errorMessage = "Message must be at least 10 characters long";
+              isValid = false;
+            } else if (value.length > 500) {
+              errorMessage = "Message must not exceed 500 characters";
+              isValid = false;
+            }
+            break;
+        }
+
+        if (!isValid) {
+          showFieldError(fieldName, errorMessage);
+          field.classList.add("error");
+        } else {
+          field.classList.add("valid");
+        }
+
+        return isValid;
+      }
+
+      // Clear field error
+      function clearFieldError(event) {
+        const field = event.target;
+        const errorElement = document.getElementById(field.name + "Error");
+
+        if (errorElement) {
+          errorElement.textContent = "";
+          errorElement.style.display = "none";
+        }
+
+        field.classList.remove("error", "valid");
+      }
+
+      // Show field error
+      function showFieldError(fieldName, message) {
+        const errorElement = document.getElementById(fieldName + "Error");
+        if (errorElement) {
+          errorElement.textContent = message;
+          errorElement.style.display = "block";
+          errorElement.style.color = "#ef4444";
+        }
+      }
+
+      // Handle form submission
+      function handleFormSubmit() {
+        const form = document.getElementById("contactForm");
+        const formData = new FormData(form);
+
+        const name = formData.get("name");
+        const email = formData.get("email");
+        const phone = formData.get("phone");
+        const subject = formData.get("subject");
+        const message = formData.get("message");
+        const newsletter = formData.get("newsletter");
+
+        // Validate all fields
+        let isValid = true;
+        const requiredFields = ["name", "email", "subject", "message"];
+
+        requiredFields.forEach((fieldName) => {
+          const field = document.getElementById(fieldName);
+          const event = { target: field };
+          if (!validateField(event)) {
+            isValid = false;
+          }
+        });
+
+        if (!isValid) {
+          showNotification("Please fix the errors in the form", "error");
+          return;
+        }
+
+        // Simulate form submission
+        const submitButton = form.querySelector('button[type="submit"]');
+        const originalText = submitButton.innerHTML;
+
+        submitButton.innerHTML = '<span class="btn-icon">⏳</span>Sending...';
+        submitButton.disabled = true;
+
+        setTimeout(() => {
+          // Reset form
+          form.reset();
+          document.getElementById("charCount").textContent = "0";
+
+          // Reset button
+          submitButton.innerHTML = originalText;
+          submitButton.disabled = false;
+
+          // Clear validation classes
+          form.querySelectorAll(".error, .valid").forEach((el) => {
+            el.classList.remove("error", "valid");
+          });
+
+          // Show success message
+          const successMessage = `Thank you, ${name}!\n\nYour message has been received. We'll get back to you at ${email} soon.\n\nSubject: ${subject}`;
+
+          showNotification("Message sent successfully!", "success");
+
+          // Optional: Show detailed popup
+          setTimeout(() => {
+            alert(successMessage);
+          }, 1000);
+        }, 2000);
+      }
+
+      // FAQ toggle functionality
+      function toggleFAQ(element) {
+        const faqItem = element.parentElement;
+        const answer = faqItem.querySelector(".faq-answer");
+        const toggle = element.querySelector(".faq-toggle");
+
+        const isOpen = faqItem.classList.contains("active");
+
+        // Close all FAQ items
+        document.querySelectorAll(".faq-item").forEach((item) => {
+          item.classList.remove("active");
+          item.querySelector(".faq-answer").style.maxHeight = "0";
+          item.querySelector(".faq-toggle").textContent = "+";
+        });
+
+        // Open clicked item if it wasn't already open
+        if (!isOpen) {
+          faqItem.classList.add("active");
+          answer.style.maxHeight = answer.scrollHeight + "px";
+          toggle.textContent = "−";
+        }
+      }
+
+      // Utility function for notifications
+      function showNotification(message, type) {
+        const notification = document.createElement("div");
+        notification.className = `notification ${type}`;
+        notification.textContent = message;
+        notification.style.cssText = `
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                padding: 12px 20px;
+                border-radius: 8px;
+                color: white;
+                font-weight: 500;
+                z-index: 10000;
+                animation: slideIn 0.3s ease;
+            `;
+
+        switch (type) {
+          case "success":
+            notification.style.backgroundColor = "#10b981";
+            break;
+          case "error":
+            notification.style.backgroundColor = "#ef4444";
+            break;
+          case "info":
+            notification.style.backgroundColor = "#3b82f6";
+            break;
+        }
+
+        document.body.appendChild(notification);
+
+        setTimeout(() => {
+          notification.style.animation = "slideOut 0.3s ease";
+          setTimeout(() => document.body.removeChild(notification), 300);
+        }, 4000);
+      }
+
+      // Add CSS for animations
+      const style = document.createElement("style");
+      style.textContent = `
+            @keyframes slideIn {
+                from { transform: translateX(100%); opacity: 0; }
+                to { transform: translateX(0); opacity: 1; }
+            }
+            @keyframes slideOut {
+                from { transform: translateX(0); opacity: 1; }
+                to { transform: translateX(100%); opacity: 0; }
+            }
+            .faq-answer {
+                max-height: 0;
+                overflow: hidden;
+                transition: max-height 0.3s ease;
+            }
+            .form-input.error, .form-select.error, .form-textarea.error {
+                border-color: #ef4444;
+                box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.1);
+            }
+            .form-input.valid, .form-select.valid, .form-textarea.valid {
+                border-color: #10b981;
+                box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.1);
+            }
+            .input-feedback {
+                display: none;
+                font-size: 0.875rem;
+                margin-top: 0.25rem;
+            }
+        `;
+      document.head.appendChild(style);
+
+      const darkModeToggle = document.getElementById('darkModeToggle');
+darkModeToggle.addEventListener('click', function() {
+  document.body.classList.toggle('dark-mode');
+  if(document.body.classList.contains('dark-mode')) {
+    darkModeToggle.textContent = '☀️';
+    localStorage.setItem('theme', 'dark');
+  } else {
+    darkModeToggle.textContent = '🌙';
+    localStorage.setItem('theme', 'light');
+  }
+});
+if(localStorage.getItem('theme') === 'dark') {
+  document.body.classList.add('dark-mode');
+  darkModeToggle.textContent = '☀️';
+}
+    </script>
+    <style>
+body.dark-mode {
+  background: linear-gradient(135deg, #222 0%, #333 50%, #222 100%) !important;
+  color: #e0e0e0 !important;
+}
+body.dark-mode .container,
+body.dark-mode #main-content {
+  background: rgba(30,30,30,0.7) !important;
+  color: #e0e0e0 !important;
+}
+body.dark-mode .navbar,
+body.dark-mode .footer {
+  background: rgba(20,20,20,0.8) !important;
+  color: #e0e0e0 !important;
+}
+body.dark-mode .card,
+body.dark-mode .glass-container,
+body.dark-mode .page-section,
+body.dark-mode .section-header {
+  background: rgba(40,40,40,0.6) !important;
+  color: #e0e0e0 !important;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.2) !important;
+}
+body.dark-mode a,
+body.dark-mode .nav-link {
+  color: #90ee90 !important;
+}
+body.dark-mode .btn {
+  background: #333 !important;
+  color: #90ee90 !important;
+  border-color: #90ee90 !important;
+}
+body.dark-mode .btn-primary {
+  background: #4c8c4a !important;
+  color: #fff !important;
+}
+body.dark-mode .btn-outline {
+  background: transparent !important;
+  color: #90ee90 !important;
+  border-color: #90ee90 !important;
+}
+body.dark-mode .btn-glass {
+  background: rgba(40,40,40,0.4) !important;
+  color: #90ee90 !important;
+}
+    </style>
+  </body>
+</html>
