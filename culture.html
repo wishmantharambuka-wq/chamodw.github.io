@@ -139,16 +139,14 @@
                     <!-- Word Count Check: ~270 words (within 250–300 range) -->
                 </div>
                 <div class="aspect-video bg-gray-200 rounded-lg overflow-hidden shadow-md">
-                    <!-- Placeholder Image for Temple -->
-                    <img src="https://placehold.co/600x400/38a169/ffffff?text=Temple+Placeholder" alt="A mock image of the Rambuka Buddhist Temple" class="w-full h-full object-cover">
+                    <img src="pictures/13.jpeg" alt="Rambuka Sri Sunandaramaya Temple" class="w-full h-full object-cover">
                 </div>
             </div>
 
             <!-- Favorite Place 2: Playground -->
             <div class="grid md:grid-cols-2 gap-8 bg-white p-6 rounded-xl shadow-xl">
                 <div class="aspect-video bg-gray-200 rounded-lg overflow-hidden shadow-md md:order-2">
-                    <!-- Placeholder Image for Playground -->
-                    <img src="https://placehold.co/600x400/f6ad55/ffffff?text=Playground+Placeholder" alt="A mock image of the Tea Kotuwa Playground" class="w-full h-full object-cover">
+                    <img src="pictures/23.jpeg" alt="Tea Kotuwa Playground" class="w-full h-full object-cover">
                 </div>
                 <div class="md:order-1">
                     <h3 class="text-2xl font-semibold text-secondary-gold mb-4">
@@ -182,11 +180,30 @@
                 </ul>
 
                 <div class="mt-8 grid grid-cols-2 md:grid-cols-4 gap-4">
-                    <!-- Placeholder images to illustrate the gallery layout -->
-                    <img src="https://placehold.co/400x300/e9d8fd/38a169?text=Tea+Estates" alt="Placeholder for tea estates photo" class="w-full h-full object-cover rounded-lg shadow-md hover:scale-[1.02] transition duration-300">
-                    <img src="https://placehold.co/400x300/bdd7ff/38a169?text=Paddy+Fields" alt="Placeholder for paddy fields photo" class="w-full h-full object-cover rounded-lg shadow-md hover:scale-[1.02] transition duration-300">
-                    <img src="https://placehold.co/400x300/ffead6/38a169?text=Vesak+Celebration" alt="Placeholder for Vesak event photo" class="w-full h-full object-cover rounded-lg shadow-md hover:scale-[1.02] transition duration-300">
-                    <img src="https://placehold.co/400x300/d5f4e6/38a169?text=Aththam+Kramaya" alt="Placeholder for community work photo" class="w-full h-full object-cover rounded-lg shadow-md hover:scale-[1.02] transition duration-300">
+                    <img src="pictures/1.jpeg" alt="Gallery Photo 1" class="gallery-img w-full h-full object-cover rounded-lg shadow-md hover:scale-[1.02] transition duration-300">
+                    <img src="pictures/3.jpeg" alt="Gallery Photo 3" class="gallery-img w-full h-full object-cover rounded-lg shadow-md hover:scale-[1.02] transition duration-300">
+                    <img src="pictures/4.jpeg" alt="Gallery Photo 4" class="gallery-img w-full h-full object-cover rounded-lg shadow-md hover:scale-[1.02] transition duration-300">
+                    <img src="pictures/5.jpeg" alt="Gallery Photo 5" class="gallery-img w-full h-full object-cover rounded-lg shadow-md hover:scale-[1.02] transition duration-300">
+                    <img src="pictures/7.jpeg" alt="Gallery Photo 7" class="gallery-img w-full h-full object-cover rounded-lg shadow-md hover:scale-[1.02] transition duration-300">
+                    <img src="pictures/8.jpeg" alt="Gallery Photo 8" class="gallery-img w-full h-full object-cover rounded-lg shadow-md hover:scale-[1.02] transition duration-300">
+                    <img src="pictures/9.jpeg" alt="Gallery Photo 9" class="gallery-img w-full h-full object-cover rounded-lg shadow-md hover:scale-[1.02] transition duration-300">
+                    <img src="pictures/10.jpeg" alt="Gallery Photo 10" class="gallery-img w-full h-full object-cover rounded-lg shadow-md hover:scale-[1.02] transition duration-300">
+                    <img src="pictures/11.jpeg" alt="Gallery Photo 11" class="gallery-img w-full h-full object-cover rounded-lg shadow-md hover:scale-[1.02] transition duration-300">
+                    <img src="pictures/12.jpeg" alt="Gallery Photo 12" class="gallery-img w-full h-full object-cover rounded-lg shadow-md hover:scale-[1.02] transition duration-300">
+                    <img src="pictures/14.jpeg" alt="Gallery Photo 14" class="gallery-img w-full h-full object-cover rounded-lg shadow-md hover:scale-[1.02] transition duration-300">
+                    <img src="pictures/15.jpeg" alt="Gallery Photo 15" class="gallery-img w-full h-full object-cover rounded-lg shadow-md hover:scale-[1.02] transition duration-300">
+                    <img src="pictures/16.jpeg" alt="Gallery Photo 16" class="gallery-img w-full h-full object-cover rounded-lg shadow-md hover:scale-[1.02] transition duration-300">
+                    <img src="pictures/17.jpeg" alt="Gallery Photo 17" class="gallery-img w-full h-full object-cover rounded-lg shadow-md hover:scale-[1.02] transition duration-300">
+                    <img src="pictures/18.jpeg" alt="Gallery Photo 18" class="gallery-img w-full h-full object-cover rounded-lg shadow-md hover:scale-[1.02] transition duration-300">
+                    <img src="pictures/19.jpeg" alt="Gallery Photo 19" class="gallery-img w-full h-full object-cover rounded-lg shadow-md hover:scale-[1.02] transition duration-300">
+                    <img src="pictures/20.jpeg" alt="Gallery Photo 20" class="gallery-img w-full h-full object-cover rounded-lg shadow-md hover:scale-[1.02] transition duration-300">
+                    <img src="pictures/21.jpeg" alt="Gallery Photo 21" class="gallery-img w-full h-full object-cover rounded-lg shadow-md hover:scale-[1.02] transition duration-300">
+                    <img src="pictures/22.jpeg" alt="Gallery Photo 22" class="gallery-img w-full h-full object-cover rounded-lg shadow-md hover:scale-[1.02] transition duration-300">
+        <!-- Modal for image preview -->
+        <div id="imgModal" class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-70 hidden">
+            <span id="closeModal" class="absolute top-8 right-12 text-white text-4xl cursor-pointer">&times;</span>
+            <img id="modalImg" src="" alt="Preview" class="max-w-full max-h-[80vh] rounded-lg shadow-2xl border-4 border-white">
+        </div>
                 </div>
             </div>
         </section>
@@ -196,5 +213,25 @@
         </footer>
     </div>
 
+<script>
+    // Modal image preview logic
+    document.querySelectorAll('.gallery-img').forEach(img => {
+        img.addEventListener('click', function() {
+            document.getElementById('modalImg').src = this.src;
+            document.getElementById('imgModal').classList.remove('hidden');
+        });
+    });
+    document.getElementById('closeModal').onclick = function() {
+        document.getElementById('imgModal').classList.add('hidden');
+        document.getElementById('modalImg').src = '';
+    };
+    // Close modal when clicking outside the image
+    document.getElementById('imgModal').onclick = function(e) {
+        if (e.target === this) {
+            this.classList.add('hidden');
+            document.getElementById('modalImg').src = '';
+        }
+    };
+</script>
 </body>
 </html>
