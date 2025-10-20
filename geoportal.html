@@ -92,6 +92,16 @@
         </div>
     </section>
 
+    <!-- Local note about GN division and circled area -->
+    <div class="container" style="margin-top:1rem;">
+        <div class="glass-effect" style="padding:1rem;">
+            <h3 style="margin-top:0;">According to my perspective,</h3>
+            <p style="margin:0; font-size:0.98rem; line-height:1.5;">
+I showed the Rambuka Gramaniladhari Division like above. Also I marked circled area. That shows actually How i feel my village. i doesn't feel the actual GN division as my village. Because Half of my village is a forest with a large mountain.
+            </p>
+        </div>
+    </div>
+
     <!-- Interactive Map Section -->
     <section class="page-section" style="background: rgba(255, 255, 255, 0.05);">
         <div class="container">
@@ -141,17 +151,6 @@
                     <button class="btn btn-outline" onclick="window.open('https://www.google.com/maps/d/view?mid=13B0v-9MGECutj59Fz-bQ8ELRBZOSqC0','_blank')" title="Open full map in a new tab">
                         <span>🔍</span> Open full map
                     </button>
-                    <button class="btn btn-tertiary" onclick="resetMap()">
-                        <span>🔄</span> Reset View
-                    </button>
-                    <button class="btn btn-info" onclick="toggleLayerPanel()">
-                        <span>🗂️</span> Layers
-                    </button>
-                </div>
-
-                <!-- Layer Control Panel -->
-                <div id="layerPanel" class="layer-panel glass-effect" style="display: none;">
-                    <h4>Map Layers</h4>
                     <div class="layer-controls">
                         <label class="layer-item">
                             <input type="checkbox" id="villageLayer" checked onchange="toggleVillageLayer()">
@@ -235,24 +234,18 @@
                 </div>
 
                 <div class="coordinates-card glass-effect">
-                    <div class="coord-header">
-                        <h3>🌳 Sinharaja Border</h3>
-                        <div class="coord-badge">UNESCO Heritage</div>
-                    </div>
-                    <div class="coord-data">
-                        <div class="coord-item">
-                            <span class="coord-label">Latitude:</span>
-                            <span class="coord-value">6.3700°N</span>
+                        <div class="coord-header">
+                            <h3>🌳 Sinharaja Rainforest</h3>
+                            <div class="coord-badge">UNESCO Heritage</div>
                         </div>
-                        <div class="coord-item">
-                            <span class="coord-label">Longitude:</span>
-                            <span class="coord-value">80.4800°E</span>
+                        <div class="coord-data">
+                            <p style="margin:0;font-size:0.95rem;line-height:1.4;">
+                                Sinharaja is a lowland tropical rainforest and a UNESCO World Heritage Site, renowned for
+                                its exceptional biodiversity and many endemic species. The forest protects primary
+                                rainforest habitat and critical watersheds; conservation efforts here are vital for
+                                regional ecology and sustainable livelihoods.
+                            </p>
                         </div>
-                        <div class="coord-item">
-                            <span class="coord-label">Status:</span>
-                            <span class="coord-value">Protected Area</span>
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>
