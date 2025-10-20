@@ -208,7 +208,7 @@
 
                             <div class="grid md:grid-cols-3 gap-6 mt-4">
                                 <div class="p-4 bg-gray-50 rounded-lg shadow-inner border-t-4 border-primary-green">
-                                    <img src="pictures/school_placeholder.jpeg" alt="Rambuka School" class="w-full h-32 object-cover rounded mb-3">
+                                    <img src="Upso/1.jfif" alt="Rambuka School" class="gallery-img w-full h-32 object-cover rounded mb-3">
                                     <h4 class="text-xl font-semibold text-gray-700 mb-1">Village School (Placeholder)</h4>
                                     <p class="text-sm text-gray-500">
                                         The primary school is crucial for village life, providing the only formal educational facility up to primary level, ensuring local children have access to learning.
@@ -216,7 +216,7 @@
                                 </div>
 
                                 <div class="p-4 bg-gray-50 rounded-lg shadow-inner border-t-4 border-secondary-gold">
-                                    <img src="pictures/community_hall_placeholder.jpeg" alt="Community Hall" class="w-full h-32 object-cover rounded mb-3">
+                                    <img src="Upso/15.jpeg" alt="Community Hall" class="gallery-img w-full h-32 object-cover rounded mb-3">
                                     <h4 class="text-xl font-semibold text-gray-700 mb-1">Community Hall (Placeholder)</h4>
                                     <p class="text-sm text-gray-500">
                                         This hall is the venue for village meetings, government-led programs, and major social functions, centralizing administrative and social organization.
@@ -224,7 +224,7 @@
                                 </div>
 
                                 <div class="p-4 bg-gray-50 rounded-lg shadow-inner border-t-4 border-primary-green">
-                                    <img src="pictures/post_office_placeholder.jpeg" alt="Post Office" class="w-full h-32 object-cover rounded mb-3">
+                                    <img src="Upso/2.PNG" alt="Post Office" class="gallery-img w-full h-32 object-cover rounded mb-3">
                                     <h4 class="text-xl font-semibold text-gray-700 mb-1">Rural Sub-Post Office (Placeholder)</h4>
                                     <p class="text-sm text-gray-500">
                                         Although small, the sub-post office is the formal link for mail delivery and basic financial transactions, connecting the village to the outside world.
@@ -259,7 +259,7 @@
 
                             <div class="grid md:grid-cols-3 gap-6 mt-4">
                                 <div class="p-4 bg-gray-50 rounded-lg shadow-inner border-t-4 border-secondary-gold">
-                                    <img src="pictures/tea_shop_placeholder.jpeg" alt="Village Tea Shop" class="w-full h-32 object-cover rounded mb-3">
+                                    <img src="Upso/5.jfif" alt="Village Tea Shop" class="gallery-img w-full h-32 object-cover rounded mb-3">
                                     <h4 class="text-xl font-semibold text-gray-700 mb-1">Local Tea Stall (Kopi Kade)</h4>
                                     <p class="text-sm text-gray-500">
                                         The heart of daily chatter. Villagers stop here for a cup of tea, snacks, and to share news and daily events before or after work.
@@ -267,7 +267,7 @@
                                 </div>
 
                                 <div class="p-4 bg-gray-50 rounded-lg shadow-inner border-t-4 border-primary-green">
-                                    <img src="pictures/paddy_field_placeholder.jpeg" alt="Paddy Field" class="w-full h-32 object-cover rounded mb-3">
+                                    <img src="Upso/6.jpg" alt="Paddy Field" class="gallery-img w-full h-32 object-cover rounded mb-3">
                                     <h4 class="text-xl font-semibold text-gray-700 mb-1">Paddy Field Edges/Borders</h4>
                                     <p class="text-sm text-gray-500">
                                         During cultivation seasons, the borders of the paddy fields become gathering spots for farmers to discuss crops, weather, and labor sharing (Aththam Kramaya).
@@ -275,7 +275,7 @@
                                 </div>
 
                                 <div class="p-4 bg-gray-50 rounded-lg shadow-inner border-t-4 border-secondary-gold">
-                                    <img src="pictures/store_placeholder.jpeg" alt="Small Store" class="w-full h-32 object-cover rounded mb-3">
+                                    <img src="Upso/7.webp" alt="Small Store" class="gallery-img w-full h-32 object-cover rounded mb-3">
                                     <h4 class="text-xl font-semibold text-gray-700 mb-1">The Small Provisions Store</h4>
                                     <p class="text-sm text-gray-500">
                                         This store acts as a mini-market and social point where women and youth meet during their daily errands, often leading to important casual social interaction.
@@ -334,24 +334,84 @@
                 </div>
 
             <script>
-                // Modal image preview logic
-                document.querySelectorAll('.gallery-img').forEach(img => {
-                    img.addEventListener('click', function() {
-                        document.getElementById('modalImg').src = this.src;
-                        document.getElementById('imgModal').classList.remove('hidden');
+                // Enhanced modal image preview with hover overlay and titles
+                (function() {
+                    // Inject overlay CSS
+                    const css = `
+                        .preview-wrap { position: relative; display: inline-block; }
+                        .preview-wrap img.gallery-img { display: block; }
+                        .preview-overlay {
+                            position: absolute;
+                            inset: 0;
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                            color: #fff;
+                            font-weight: 600;
+                            background: rgba(0,0,0,0.35);
+                            opacity: 0;
+                            transition: opacity 160ms ease-in-out;
+                            pointer-events: none;
+                            font-size: 0.95rem;
+                            border-radius: inherit;
+                        }
+                        .preview-wrap:hover .preview-overlay { opacity: 1; }
+                        .gallery-img { cursor: pointer; }
+                    `;
+                    const styleEl = document.createElement('style');
+                    styleEl.textContent = css;
+                    document.head.appendChild(styleEl);
+
+                    document.addEventListener('DOMContentLoaded', function() {
+                        const imgs = Array.from(document.querySelectorAll('.gallery-img'));
+                        imgs.forEach(img => {
+                            // set pointer and accessible title
+                            img.style.cursor = 'pointer';
+                            if (!img.getAttribute('title')) img.setAttribute('title', 'Click here to preview');
+
+                            // wrap the image if not already wrapped
+                            const parent = img.parentElement;
+                            if (!parent.classList.contains('preview-wrap')) {
+                                const wrap = document.createElement('div');
+                                wrap.className = 'preview-wrap';
+                                // preserve layout by copying display properties
+                                wrap.style.display = 'block';
+                                parent.insertBefore(wrap, img);
+                                wrap.appendChild(img);
+
+                                const overlay = document.createElement('span');
+                                overlay.className = 'preview-overlay';
+                                overlay.textContent = 'Click here to preview';
+                                wrap.appendChild(overlay);
+                            }
+
+                            // click handler already attached to image nodes - ensure it opens modal
+                            img.addEventListener('click', function() {
+                                const modal = document.getElementById('imgModal');
+                                const modalImg = document.getElementById('modalImg');
+                                modalImg.src = this.src;
+                                modal.classList.remove('hidden');
+                                // focus close button for accessibility
+                                const closeBtn = document.getElementById('closeModal');
+                                if (closeBtn) closeBtn.focus();
+                            });
+                        });
+
+                        // Close handlers
+                        const modal = document.getElementById('imgModal');
+                        const closeBtn = document.getElementById('closeModal');
+                        if (closeBtn) closeBtn.addEventListener('click', function() {
+                            modal.classList.add('hidden');
+                            document.getElementById('modalImg').src = '';
+                        });
+                        if (modal) modal.addEventListener('click', function(e) {
+                            if (e.target === this) {
+                                this.classList.add('hidden');
+                                document.getElementById('modalImg').src = '';
+                            }
+                        });
                     });
-                });
-                document.getElementById('closeModal').onclick = function() {
-                    document.getElementById('imgModal').classList.add('hidden');
-                    document.getElementById('modalImg').src = '';
-                };
-                // Close modal when clicking outside the image
-                document.getElementById('imgModal').onclick = function(e) {
-                    if (e.target === this) {
-                        this.classList.add('hidden');
-                        document.getElementById('modalImg').src = '';
-                    }
-                };
+                })();
             </script>
             </body>
             </html>
